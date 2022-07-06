@@ -10,6 +10,10 @@
     font-family: 'Noto Sans KR';
 }
 
+img{
+    -webkit-user-drag: none;
+}
+
 .font_light{
     font-weight: 300;
 }

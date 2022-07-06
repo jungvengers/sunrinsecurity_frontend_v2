@@ -1,5 +1,52 @@
-body{
+@import url("../animation.css");
+
+.background_img{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
     background-image: url("@/assets/public/background.png");
     background-size: 1920px 1080px;
     background-repeat: no-repeat;
+}
+
+.main_panel{
+    margin-left: 120px;
+    margin-top: 130px;
+    width:828px;
+    user-select: none;
+}
+
+hr:first-child{
+    border: 5px solid var(--white_1);
+    width: 500px;
+    box-shadow: 12px 11px 6px 0 rgba(0, 0, 0, 0.3);
+    animation-delay: .1s;
+}
+
+.main_title{
+    font-size: 100px;
+    color: var(--white_1);
+    line-height: 120px;
+    text-align: right;
+    margin: 15px 0;
+    text-shadow: 12px 11px 6px rgba(0, 0, 0, 0.3);
+    animation-delay: .3s;
+}
+
+hr:last-child{
+    border: 5px solid var(--white_1);
+    width: 500px;
+    margin-left: 328px;
+    box-shadow: 12px 11px 6px 0 rgba(0, 0, 0, 0.3);
+    animation-delay: .6s;
+}
+
+hr:first-child, .main_title, hr:last-child{
+    opacity: 0;
+    animation-duration: 1s;
+    animation-name: fadeInBottom;
+    animation-fill-mode: forwards;
 }
