@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'sunrinsecurity_frontend_v2',
+    title: '정보보호과',
     htmlAttrs: {
       lang: 'ko'
     },
@@ -21,6 +21,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    "@/assets/styles/global.css"
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
