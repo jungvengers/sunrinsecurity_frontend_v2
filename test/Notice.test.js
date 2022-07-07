@@ -1,12 +1,12 @@
 import { shallowMount } from '@vue/test-utils'
-import Header from '@/components/Header.vue'
+import notice from '@/pages/notice.vue'
 
 describe('NoticePage', () => {
     test('is a Vue instance', () => {
-        const wrapper = shallowMount(Header, {
+        const wrapper = shallowMount(notice, {
             stubs: ['router-link']
         });
-        console.log(wrapper);
         expect(wrapper.vm).toBeTruthy();
     });
 });
+

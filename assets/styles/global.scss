@@ -10,6 +10,10 @@
     font-family: 'Noto Sans KR';
 }
 
+body{
+    background-color: var(--background_2);
+}
+
 img{
     -webkit-user-drag: none;
 }
@@ -29,4 +33,6 @@ img{
     --header_hover: rgba(85, 91, 110, 0.3);
     --white_1: #f0f0f0;
     --black_1: black;
+    --background_1: #fcf8e8;
+    --background_2: #3d3d3d;
 }

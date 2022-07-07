@@ -21,6 +21,7 @@ header{
     font-size: 17px;
     align-items: center;
     transition: 0.2s;
+    mix-blend-mode: luminosity;
 }
 .header_menu:hover{
     background-color: var(--header_hover);

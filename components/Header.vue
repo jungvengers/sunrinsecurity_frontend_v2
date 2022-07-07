@@ -15,4 +15,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="@/assets/styles/header/style.scss"></style>
+<style lang="scss" src="@/assets/styles/Header/style.scss"></style>
