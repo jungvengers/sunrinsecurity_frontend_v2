@@ -2,9 +2,9 @@
     <div class="background_img">
         <transition name="main_panel">
             <div class="main_panel" v-if="show">
-                <hr />
-                <h1 class="main_title font_regular">선린인터넷고등학교<br>정보보호과</h1>
-                <hr />
+                <hr class="main_hr" />
+                <h1 class="main_title font_bold">선린인터넷고등학교<br>정보보호과</h1>
+                <hr class="main_hr"/>
             </div>
         </transition>
     </div>
