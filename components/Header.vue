@@ -1,7 +1,7 @@
 <template>
     <header>
         <router-link :to="'/'"><img class="header_logo" src="@/assets/public/logo.png"></router-link>
-        <router-link class="header_menu" v-for="i, n in headerMenuList" :key="n" :to="i.route">{{i.name}}</router-link>
+        <router-link class="header_menu" v-for="i, n in headerMenuList" :key="n" :to="i.route" :class="{text_underline: $nuxt.$route.path === i.route}">{{i.name}}</router-link>
     </header>
 </template>
 
@@ -15,4 +15,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="@/assets/styles/Header/style.scss"></style>
+<style lang="scss" src="@/assets/styles/header/style.scss"></style>

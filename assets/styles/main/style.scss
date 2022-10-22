@@ -7,7 +7,7 @@
     bottom: 0;
     right: 0;
     z-index: 0;
-    background-image: url("@/assets/public/background.png");
+    background-image:linear-gradient(rgba(63, 63, 63, 0.25), rgba(63, 63, 63, 0.25)), url("@/assets/public/background.png");
     background-size: 1920px 1080px;
     background-repeat: no-repeat;
 }
@@ -23,18 +23,18 @@
     animation-fill-mode: both;
 }
 
-hr{
+.main_hr{
     &:first-child{
         border: 5px solid var(--white_1);
         width: 500px;
-        box-shadow: 12px 11px 6px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
 
     &:last-child{
         border: 5px solid var(--white_1);
         width: 500px;
         margin-left: 328px;
-        box-shadow: 12px 11px 6px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
 }
 
@@ -44,5 +44,5 @@ hr{
     line-height: 120px;
     text-align: right;
     margin: 15px 0;
-    text-shadow: 12px 11px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }

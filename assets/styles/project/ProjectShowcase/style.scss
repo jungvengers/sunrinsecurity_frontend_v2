@@ -1,0 +1,39 @@
+.showcase{
+    
+    &_background {
+        position: relative;
+        margin: 0 auto;
+        padding-top: 20px;
+        height: 100%;
+        width: 80%;
+        max-width: 1200px;
+    }
+
+    &_hr{
+        border: 1px solid var(--white_3);
+        margin: 20px 0;
+    }
+    
+    &_club {
+        display: flex;
+        gap: 15px;
+        align-items: flex-end;
+        justify-content: center;
+
+        & a {
+            cursor: pointer;
+        }
+
+        &_item{
+            color: var(--gray_2);
+            font-size: 24px;
+            font-weight: 500;
+
+            &_selected {
+                color: var(--white_1);
+                font-size: 24px;
+                font-weight: 500;
+            }
+        }
+    }
+}
