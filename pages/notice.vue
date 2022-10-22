@@ -1,13 +1,13 @@
 <template>
-    <ArticleCard />
+    <NoticePage />
 </template>
 
 <script>
-import ArticleCard from "@/components/ArticleCard.vue"
+import NoticePage from "@/components/NoticePage.vue"
 export default {
-    name: "NoticePage",
+    name: "notice",
     components:{
-        ArticleCard
+        NoticePage
     },
     setup() {
         
