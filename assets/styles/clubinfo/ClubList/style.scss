@@ -1,0 +1,51 @@
+@import "@/assets/styles/animation.scss";
+
+.clublist {
+    &_background {
+        position: relative;
+        margin: 0 auto;
+        padding-top: 50px;
+        height: 85%;
+        width: 80%;
+        max-width: 1000px;
+    }
+
+    &_box{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        align-content: center;
+        text-align: center;
+        gap: 30px 30px;
+        overflow-y: scroll;
+        height: 80%;
+    }
+
+    &_item{
+    
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: fadeInBottom;
+
+        width: 240px;
+        padding: 0;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 7px;
+        background-color: var(--white_1);
+        overflow: hidden;
+        cursor: pointer;
+        padding: 20px;
+
+        & p {
+            font-size: 28px;
+            color: var(--black_1);
+            font-weight: bold;
+        }
+
+        & img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}
