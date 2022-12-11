@@ -1,19 +1,16 @@
 <template>
-    <div id="app">
-        <Header />
-        <Nuxt />
+  <div id="app">
+    <Header />
+    <div class="main">
+      <div class="panel">
+        <slot />
+      </div>
     </div>
+  </div>
 </template>
 
-<script>
-import Header from "@/components/Header.vue"
+<script setup></script>
 
-export default {
-    components:{
-        Header
-    },
-    setup() {
-        
-    },
-}
-</script>
+<style lang="scss" scoped>
+@import "~~/assets/styles/layouts/default/styles.scss";
+</style>

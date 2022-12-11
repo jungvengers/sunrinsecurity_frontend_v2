@@ -1,0 +1,39 @@
+@import "_variables.scss";
+
+header {
+  position: fixed;
+  height: 70px;
+  display: flex;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-color: $header_color;
+  padding: 0 120px;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.header_menu {
+  color: $header_text_color;
+  display: flex;
+  padding: 10px;
+  font-size: 17px;
+  align-items: center;
+  transition: 0.2s;
+  mix-blend-mode: luminosity;
+}
+
+.header_menu:hover {
+  background-color: $header_hover;
+}
+
+.header_logo {
+  height: 60px;
+  margin-top: 5px;
+  margin-right: 20px;
+}

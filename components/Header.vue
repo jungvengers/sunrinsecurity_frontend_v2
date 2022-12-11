@@ -1,18 +1,22 @@
 <template>
-    <header>
-        <router-link :to="'/'"><img class="header_logo" src="@/assets/public/logo.png"></router-link>
-        <router-link class="header_menu" v-for="i, n in headerMenuList" :key="n" :to="i.route">{{i.name}}</router-link>
-    </header>
+  <header>
+    <NuxtLink :to="'/'"
+      ><img class="header_logo" src="@/assets/images/logo.png"
+    /></NuxtLink>
+    <NuxtLink
+      v-for="(i, n) in headerMenuList"
+      :key="n"
+      class="header_menu"
+      :to="i.path"
+      >{{ i.name }}</NuxtLink
+    >
+  </header>
 </template>
 
-<script>
-import headerMenuList from "@/assets/public/headerMenuList.js"
-export default {
-    name: 'Header',
-    setup(){
-        return {headerMenuList};
-    }
-}
+<script setup>
+import headerMenuList from "~~/constants/headerMenuList";
 </script>
 
-<style lang="scss" src="@/assets/styles/Header/style.scss"></style>
+<style lang="scss" scoped>
+@import "~~/assets/styles/components/Header/styles.scss";
+</style>

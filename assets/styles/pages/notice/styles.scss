@@ -1,0 +1,9 @@
+@import "_variables.scss";
+
+table {
+  thead {
+    color: $notice_page_thead_text_color;
+    font-size: 14px;
+    border-bottom: 1px solid $notice_page_thead_border_color;
+  }
+}
