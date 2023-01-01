@@ -1,22 +1,27 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(i, n) in noticeList" :key="n">
-        <td>{{ i.id }}</td>
-        <td>{{ i.title }}</td>
-        <td>{{ i.author }}</td>
-        <td>{{ i.date }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="notice">
+    <h1 class="title">학과소식</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template v-for="(i, n) in noticeList" :key="n">
+          <tr>
+            <td>{{ i.id }}</td>
+            <td>{{ i.title }}</td>
+            <td>{{ i.author }}</td>
+            <td>{{ new Date(i.date).toLocaleDateString("ko-KR") }}</td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script setup>
