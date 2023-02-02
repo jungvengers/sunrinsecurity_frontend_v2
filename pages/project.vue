@@ -10,12 +10,15 @@
       <div v-for="(i, n) in 6" :key="n" class="project_item">
         <div></div>
         <div>
-          <p>{{ content[i + pagenation].title }}</p>
-          <p><span>참여 동아리</span>{{ content[i + pagenation].club }}</p>
-          <p><span>참가자</span>{{ content[i + pagenation].paticipate }}</p>
-          <p><span>분야</span>{{ content[i + pagenation].kind }}</p>
+          <p>{{ content[i - 1 + pagenation].title }}</p>
+          <p><span>참여 동아리</span> {{ content[i - 1 + pagenation].club }}</p>
           <p>
-            <span>한 줄 소개</span>{{ content[i + pagenation].instruction }}
+            <span>참가자</span> {{ content[i - 1 + pagenation].paticipate }}
+          </p>
+          <p><span>분야</span> {{ content[i - 1 + pagenation].kind }}</p>
+          <p>
+            <span>한 줄 소개</span>
+            {{ content[i - 1 + pagenation].instruction }}
           </p>
         </div>
       </div>
