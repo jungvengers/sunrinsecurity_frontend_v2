@@ -1,0 +1,37 @@
+@import "_variables.scss";
+
+.notice_detail {
+
+  .title_panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .sub_title {
+      cursor: pointer;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      p {
+        color: $notice_detail_page_info_text_color;
+
+        span {
+          color: $notice_detail_page_info_constant_color;
+        }
+      }
+    }
+  }
+
+  .notice_detail_panel {
+    padding: 36px 32px;
+
+    .content {
+      color: $notice_detail_page_content_text_color;
+      white-space: pre-line;
+    }
+  }
+}

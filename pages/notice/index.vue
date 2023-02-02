@@ -1,0 +1,63 @@
+<template>
+  <div class="notice">
+    <div class="title_panel">
+      <h1 class="title">학과소식</h1>
+      <h2 class="sub_title">
+        정보보호과 내에서 진행하는 행사 등 각종 소식입니다.
+      </h2>
+    </div>
+    <div class="notice_list_panel">
+      <div class="category">
+        <div
+          v-for="(noticeCategory, n) in noticeCategoryList"
+          :key="n"
+          class="category_item"
+        >
+          {{ noticeCategory }}
+        </div>
+      </div>
+      <div
+        v-for="(noticeItem, n) in noticeList"
+        :key="n"
+        class="notice_list_item"
+        @click="router.push(`/notice/${noticeItem.id}`)"
+      >
+        <p>{{ noticeItem.id }}</p>
+        <p>{{ noticeItem.title }}</p>
+        <p>{{ noticeItem.author }}</p>
+        <p>{{ new Date(noticeItem.date).toLocaleDateString("ko-kr") }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import noticeCategoryList from "~~/constants/noticeCategoryList";
+const router = useRouter();
+const noticeList = [
+  {
+    id: 1,
+    title: "notice 1",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 2,
+    title: "notice 2",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+];
+</script>
+
+<style lang="scss" scoped>
+@import "~~/assets/styles/pages/notice/index/styles.scss";
+</style>

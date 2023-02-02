@@ -1,0 +1,16 @@
+@import "_variables.scss";
+
+.project {
+  .project_panel {
+    display: flex;
+    padding: 0 32px;
+    gap: 12px;
+
+    .project_item {
+      display: flex;
+      flex: 0.5;
+      height: 200px;
+      background-color: $project_page_item_background_color;
+    }
+  }
+}

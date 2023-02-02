@@ -7,12 +7,37 @@
   .panel {
     display: flex;
     flex-direction: column;
-    margin: 40px auto;
-    padding: 24px 38px 36px;
-    border-radius: 12px;
+    margin: 32px auto;
+    border-radius: 8px;
     background-color: $main_panel_background_color;
-    width: 1300px;
+    width: 1280px;
     height: 800px;
     overflow-y: auto;
+
+    .title_panel {
+      padding: 28px 32px;
+      background-color: $title_background_color;
+  
+      .title {
+        font-size: 28px;
+        font-weight: $font_semi_bold;
+        color: $title_color;
+      }
+    
+      .sub_title {
+        margin-top: 10px;
+        font-size: 16px;
+        font-weight: $font_medium;
+        color: $sub_title_color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1344px) {
+  .main {
+    .panel {
+      margin: 32px;
+    }
   }
 }

@@ -1,9 +1,14 @@
 <template>
   <div class="background_img">
     <div class="main_panel">
-      <hr />
-      <h1 class="main_title">선린인터넷고등학교<br />정보보호과</h1>
-      <hr />
+      <div class="title">
+        <p class="sub_title">선린인터넷고등학교</p>
+        <h1 class="main_title">
+          정보보호과
+          <img src="@/assets/images/logo.svg" />
+        </h1>
+        <p class="sub_title">우리는 陰地에서 일하고 陽地를 指向한다</p>
+      </div>
     </div>
   </div>
 </template>

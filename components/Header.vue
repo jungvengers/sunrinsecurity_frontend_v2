@@ -1,15 +1,17 @@
 <template>
   <header>
-    <NuxtLink :to="'/'"
-      ><img class="header_logo" src="@/assets/images/logo.png"
-    /></NuxtLink>
-    <NuxtLink
-      v-for="(i, n) in headerMenuList"
-      :key="n"
-      class="header_menu"
-      :to="i.path"
-      >{{ i.name }}</NuxtLink
-    >
+    <div>
+      <NuxtLink :to="'/'" class="header_logo_link"
+        ><img class="header_logo" src="@/assets/images/logo.svg"
+      /></NuxtLink>
+      <NuxtLink
+        v-for="(i, n) in headerMenuList"
+        :key="n"
+        class="header_menu"
+        :to="i.path"
+        >{{ i.name }}</NuxtLink
+      >
+    </div>
   </header>
 </template>
 

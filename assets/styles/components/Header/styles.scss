@@ -2,12 +2,8 @@
 
 header {
   position: fixed;
-  height: 70px;
+  height: 64px;
   display: flex;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  background-color: $header_color;
-  padding: 0 120px;
   z-index: 1000;
   top: 0;
   left: 0;
@@ -16,24 +12,42 @@ header {
   user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  
+  div {
+    display: flex;
+    margin: 0 auto;
+    width: 1280px;
+
+    .header_menu {
+      color: $header_text_color;
+      display: flex;
+      padding: 10px;
+      font-size: 17px;
+      font-weight: $font_medium;
+      align-items: center;
+      opacity: 0.75;
+    }
+    
+    .header_logo_link {
+      padding: 16px 22px 16px 0;
+      opacity: 0.75;
+    
+      .header_logo {
+        height: 31px;
+      }
+    }
+    
+    .router-link-active {
+      opacity: 1 !important;
+    }
+  }
 }
 
-.header_menu {
-  color: $header_text_color;
-  display: flex;
-  padding: 10px;
-  font-size: 17px;
-  align-items: center;
-  transition: 0.2s;
-  mix-blend-mode: luminosity;
-}
-
-.header_menu:hover {
-  background-color: $header_hover;
-}
-
-.header_logo {
-  height: 60px;
-  margin-top: 5px;
-  margin-right: 20px;
+@media screen and (max-width: 1344px) {
+  header {
+    div {
+      width: 100%;
+      padding: 0 32px;
+    }
+  }
 }
