@@ -1,0 +1,32 @@
+@import "_variables.scss";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .pagination_num_wrap {
+    display: flex;
+    color: $pagination_num_color;
+    font-size: 16px;
+    font-weight: $font_medium;
+
+    .pagination_num {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      justify-content: space-around;
+      align-items: center;
+      border-radius: 100%;
+      cursor: pointer;
+
+      &_active {
+        color: $pagination_num_active_color;
+        background-color: $pagination_num_active_background_color;
+      }
+    }
+  }
+}

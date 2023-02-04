@@ -12,6 +12,45 @@
       flex: 1 1 40%;
       height: 180px;
       background-color: $project_page_item_background_color;
+
+      .img_panel {
+        padding: 16px;
+
+        img {
+          width: 150px;
+          height: 150px;
+        }
+      }
+
+      .content_panel {
+        padding: 24px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .title {
+          font-size: 20px;
+          font-weight: $font_medium;
+          color: $project_page_item_title_color;
+        }
+
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+
+          p {
+            font-size: 16px;
+            font-weight: $font_medium;
+            color: $project_page_item_content_color;
+  
+            span {
+              margin-right: 8px;
+              color: $project_page_item_content_title_color;
+            }
+          }
+        }
+      }
     }
   }
 }

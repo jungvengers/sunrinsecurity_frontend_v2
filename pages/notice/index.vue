@@ -28,12 +28,11 @@
         <p>{{ new Date(noticeItem.date).toLocaleDateString("ko-kr") }}</p>
       </div>
     </div>
+    <Pagination :page-count="pageCount" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import noticeCategoryList from "~~/constants/noticeCategoryList";
 const router = useRouter();
 const noticeList = [
@@ -56,6 +55,8 @@ const noticeList = [
     date: "2022-12-11T08:27:09.200Z",
   },
 ];
+
+let pageCount = ref(1);
 </script>
 
 <style lang="scss" scoped>
