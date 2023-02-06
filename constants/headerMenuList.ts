@@ -9,6 +9,6 @@ export default [
   },
   {
     name: "동아리 소개",
-    path: "/clubinfo",
+    path: "/club",
   },
 ];

@@ -4,7 +4,10 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 20px;
+  padding: 24px 0;
+  width: 100%;
+  border-top: 1px solid $grayscale_40;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
 
@@ -13,6 +16,10 @@
     color: $pagination_num_color;
     font-size: 16px;
     font-weight: $font_medium;
+
+    .pagination_arrow {
+      cursor: pointer;
+    }
 
     .pagination_num {
       display: flex;

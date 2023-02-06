@@ -54,6 +54,48 @@ const noticeList = [
     author: "망냥냥냥",
     date: "2022-12-11T08:27:09.200Z",
   },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
+  {
+    id: 3,
+    title: "notice 3",
+    author: "망냥냥냥",
+    date: "2022-12-11T08:27:09.200Z",
+  },
 ];
 
 let pageCount = ref(1);

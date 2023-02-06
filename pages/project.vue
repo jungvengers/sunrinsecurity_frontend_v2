@@ -66,22 +66,6 @@ const contents = [
     kind: "kind",
     instruction: "instruction",
   },
-  {
-    id: 5,
-    title: "project 5",
-    club: "club",
-    paticipate: "participate",
-    kind: "kind",
-    instruction: "instruction",
-  },
-  {
-    id: 6,
-    title: "project 6",
-    club: "club",
-    paticipate: "participate",
-    kind: "kind",
-    instruction: "instruction",
-  },
 ];
 const pageCount = 11;
 </script>
