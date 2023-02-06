@@ -5,6 +5,7 @@
   align-items:flex-start;
 
   .panel {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 32px auto;
