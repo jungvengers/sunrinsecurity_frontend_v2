@@ -9,19 +9,17 @@
     <div class="project_panel">
       <div v-for="(content, n) in contents" :key="n" class="project_item">
         <div class="img_panel">
-          <img
-            src="https://cdn.discordapp.com/attachments/808385907857031199/1060106010490056764/image.png"
-          />
+          <img :src="content.image" />
         </div>
         <div class="content_panel">
-          <p class="title">{{ content.title }}</p>
+          <p class="title">{{ content.name }}</p>
           <div>
             <p><span>참여 동아리</span> {{ content.club }}</p>
-            <p><span>참가자</span> {{ content.paticipate }}</p>
-            <p><span>분야</span> {{ content.kind }}</p>
+            <p><span>참가자</span> {{ content.participant }}</p>
+            <p><span>분야</span> {{ content.type }}</p>
             <p>
               <span>한 줄 소개</span>
-              {{ content.instruction }}
+              {{ content.description }}
             </p>
           </div>
         </div>
@@ -33,41 +31,10 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-const contents = [
-  {
-    id: 1,
-    title: "project 1",
-    club: "club",
-    paticipate: "participate",
-    kind: "kind",
-    instruction: "instruction",
-  },
-  {
-    id: 2,
-    title: "project 2",
-    club: "club",
-    paticipate: "participate",
-    kind: "kind",
-    instruction: "instruction",
-  },
-  {
-    id: 3,
-    title: "project 3",
-    club: "club",
-    paticipate: "participate",
-    kind: "kind",
-    instruction: "instruction",
-  },
-  {
-    id: 4,
-    title: "project 4",
-    club: "club",
-    paticipate: "participate",
-    kind: "kind",
-    instruction: "instruction",
-  },
-];
-const pageCount = 11;
+import { getProjectList } from "~~/composables/project";
+
+const pageCount = 1;
+const contents = await getProjectList(pageCount);
 </script>
 
 <style lang="scss" scoped>

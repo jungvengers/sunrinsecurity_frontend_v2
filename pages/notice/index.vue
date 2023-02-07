@@ -25,7 +25,7 @@
         <p>{{ noticeItem.id }}</p>
         <p>{{ noticeItem.title }}</p>
         <p>{{ noticeItem.author }}</p>
-        <p>{{ new Date(noticeItem.date).toLocaleDateString("ko-kr") }}</p>
+        <p>{{ new Date(noticeItem.createdAt).toLocaleDateString("ko-kr") }}</p>
       </div>
     </div>
     <Pagination :page-count="pageCount" />
@@ -34,71 +34,13 @@
 
 <script lang="ts" setup>
 import noticeCategoryList from "~~/constants/noticeCategoryList";
+import { getNoticeList } from "~~/composables/notice";
+
 const router = useRouter();
-const noticeList = [
-  {
-    id: 1,
-    title: "notice 1",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 2,
-    title: "notice 2",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-  {
-    id: 3,
-    title: "notice 3",
-    author: "망냥냥냥",
-    date: "2022-12-11T08:27:09.200Z",
-  },
-];
 
 let pageCount = ref(1);
+
+const noticeList = await getNoticeList(pageCount.value);
 </script>
 
 <style lang="scss" scoped>

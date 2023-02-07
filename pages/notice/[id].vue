@@ -11,7 +11,7 @@
         <p><span>작성자</span> {{ content.author }}</p>
         <p>
           <span>작성일</span>
-          {{ new Date(content.date).toLocaleDateString("ko-kr") }}
+          {{ new Date(content.createdAt).toLocaleDateString("ko-kr") }}
         </p>
       </div>
     </div>
@@ -23,14 +23,12 @@
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
+import { getNoticeDetail } from "~~/composables/notice";
+
 const router = useRouter();
-const content = {
-  id: 1,
-  title: "notice 1",
-  author: "망냥냥냥",
-  date: "2022-12-11T08:27:09.200Z",
-  content: "asdfasdfasdfasdfasdfasdfasdfasdasdfsdffsfsdfsdfsdfasdf\nasdfsdfa",
-};
+const content = await getNoticeDetail(
+  router.currentRoute.value.params.id as string,
+);
 </script>
 
 <style lang="scss" scoped>

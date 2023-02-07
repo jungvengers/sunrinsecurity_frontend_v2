@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseUrl: process.env.BASE_URL,
+      BaseUrl: process.env.BASE_URL,
       ServiceDomain: process.env.SERVICE_DOMAIN,
     },
   },
