@@ -7,3 +7,12 @@ export interface ProjectList {
   description: string;
   participant: string;
 }
+
+export interface CreateProject {
+  club: string;
+  name: string;
+  type: string;
+  image: File;
+  description: string;
+  participant: string;
+}

@@ -1,0 +1,45 @@
+.admin {
+  button {
+    padding: 8px 12px;
+    color: $grayscale_70;
+    background-color: $grayscale_40;
+    border-radius: 8px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+
+  div {
+    display: none;
+    margin-top: 12px;
+    color: $grayscale_70;
+
+    input {
+      display: block;
+      margin-bottom: 4px;
+      padding: 8px 12px;
+      background-color: $grayscale_40;
+      color: $grayscale_70;
+      border-radius: 8px;
+    }
+
+    textarea {
+      width: 400px;
+      height: 300px;
+      padding: 8px 12px;
+      background-color: $grayscale_40;
+      border-radius: 8px;
+    }
+  }
+
+  span {
+    display: none;
+
+    button:last-child {
+      display: none;
+    }
+  }
+
+  .active {
+    display: block !important;
+  }
+}

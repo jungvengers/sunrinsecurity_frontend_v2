@@ -14,3 +14,9 @@ export interface NoticeDetail {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CreateNotice {
+  title: string;
+  author: string;
+  content: string;
+}

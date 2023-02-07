@@ -9,3 +9,12 @@ export const getProjectList = async (page: number): Promise<ProjectList[]> => {
     return e;
   }
 };
+
+export const getProjectListAll = async (): Promise<ProjectList[]> => {
+  try {
+    const { data } = await getAPI.get(`/Project`);
+    return data;
+  } catch (e: any) {
+    return e;
+  }
+};

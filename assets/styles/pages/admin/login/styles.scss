@@ -1,0 +1,53 @@
+.admin_login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 44px 32px;
+  background-color: $grayscale_20;
+  border-radius: 8px;
+
+  h1 {
+    color: $grayscale_70;
+    font-size: 28px;
+    font-weight: $font_semi_bold;
+  }
+
+  .form {
+    p {
+      margin-bottom: 8px;
+      color: $grayscale_50;
+      font-size: 16px;
+      font-weight: $font_medium;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background-color: $grayscale_40;
+      color: $grayscale_70;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  button {
+    width: 90px;
+    margin-top: 24px;
+    margin-left: auto;
+    padding: 12px 24px;
+    color: $grayscale_70;
+    font-size: 16px;
+    font-weight: $font_medium;
+    background-color: $grayscale_40;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
