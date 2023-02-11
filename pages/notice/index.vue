@@ -1,10 +1,15 @@
 <template>
   <div class="notice">
     <div class="title_panel">
-      <h1 class="title">학과소식</h1>
-      <h2 class="sub_title">
-        정보보호과 내에서 진행하는 행사 등 각종 소식입니다.
-      </h2>
+      <div>
+        <h1 class="title">학과소식</h1>
+        <h2 class="sub_title">
+          정보보호과 내에서 진행하는 행사 등 각종 소식입니다.
+        </h2>
+      </div>
+      <button class="write_notice" @click="router.push('/notice/write')">
+        글쓰기
+      </button>
     </div>
     <div class="notice_list_panel">
       <div class="category">
