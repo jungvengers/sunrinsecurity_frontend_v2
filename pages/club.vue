@@ -1,10 +1,12 @@
 <template>
   <div class="club">
     <div class="title_panel">
-      <h1 class="title">동아리 소개</h1>
-      <h2 class="sub_title">
-        정보보호과 내에서 운영 중인 동아리에 대한 정보를 찾아볼 수 있습니다.
-      </h2>
+      <div>
+        <h1 class="title">동아리 소개</h1>
+        <h2 class="sub_title">
+          정보보호과 내에서 운영 중인 동아리에 대한 정보를 찾아볼 수 있습니다.
+        </h2>
+      </div>
     </div>
     <div class="club_panel">
       <img :src="club.image" class="club_image" />
@@ -35,7 +37,11 @@
           :key="n"
           :to="{ query: { name: i.toLowerCase() } }"
           class="club_list_item"
-          :class="{ active: i.toLowerCase() === route.query.name }"
+          :class="{
+            active:
+              i.toLowerCase() === route.query.name ||
+              (!route.query.name && n === 0),
+          }"
           >{{ i }}</NuxtLink
         >
       </div>

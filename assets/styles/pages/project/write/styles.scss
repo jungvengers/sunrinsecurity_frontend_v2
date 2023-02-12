@@ -1,5 +1,5 @@
 .title {
-  display: flex;
+  color: $grayscale_70;
   gap: 8px;
 
   input {
@@ -9,11 +9,30 @@
     font-size: 16px;
     background-color: $grayscale_40;
   }
-  input:first-child {
-    flex-grow: 9;
+  
+  .first {
+    display: flex;
+
+    input:first-child {
+      flex-grow: 9;
+    }
+    input:nth-child(2) {
+      flex-grow: 1;
+    }
+    input:last-child {
+      flex-grow: 1;
+    }
   }
-  input:last-child {
-    flex-grow: 1;
+
+  .second {
+    display: flex;
+
+    input:first-child {
+      flex-grow: 1;
+    }
+    input:last-child {
+      flex-grow: 9;
+    }
   }
 }
 

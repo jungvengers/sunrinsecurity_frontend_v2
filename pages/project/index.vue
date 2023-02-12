@@ -7,6 +7,9 @@
           정보보호과 학생들이 진행한 프로젝트를 확인할 수 있는 페이지입니다.
         </h2>
       </div>
+      <button class="write_notice" @click="router.push('/notice/write')">
+        글쓰기
+      </button>
     </div>
     <div class="project_panel">
       <div v-for="(content, n) in contents" :key="n" class="project_item">
@@ -37,8 +40,9 @@ import { getProjectList } from "~~/composables/project";
 
 const pageCount = 1;
 const contents = await getProjectList(pageCount);
+const router = useRouter();
 </script>
 
 <style lang="scss" scoped>
-@import "~~/assets/styles/pages/project/styles.scss";
+@import "~~/assets/styles/pages/project/index/styles.scss";
 </style>

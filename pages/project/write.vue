@@ -1,8 +1,15 @@
 <template>
   <div>
     <div class="title">
-      <input v-model="title" type="text" placeholder="제목" />
-      <input v-model="author" type="text" placeholder="작성자" />
+      <div class="first">
+        <input v-model="name" type="text" placeholder="프로젝트명" />
+        <input v-model="club" type="text" placeholder="참여동아리" />
+        <input v-model="participant" type="text" placeholder="참가자" />
+      </div>
+      <div class="second">
+        <input v-model="type" type="text" placeholder="분야" />
+        <input v-model="description" type="text" placeholder="한 줄 소개" />
+      </div>
     </div>
     <editor
       v-model="content"
@@ -22,29 +29,35 @@
         content_style: 'div {background-color: $grayscale_40;}',
       }"
     />
-    <button @click="sendNotice()">작성완료</button>
+    <button @click="sendProject()">작성완료</button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
-import { createNotice } from "~~/api/notice";
+import { createProject } from "~~/api/project";
 
 const router = useRouter();
 
-let title = ref("");
-let author = ref("");
+let name = ref("");
+let club = ref("");
+let participant = ref("");
+let type = ref("");
+let description = ref("");
 let content = ref("");
 
-const sendNotice = async () => {
+const sendProject = async () => {
   const data = {
-    title: title.value,
-    author: author.value,
+    name: name.value,
+    club: club.value,
+    participant: participant.value,
+    type: type.value,
+    description: description.value,
     content: content.value,
   };
-  const res = await createNotice(data);
+  const res = await createProject(data);
   if (res.status === 200) {
-    router.push("/notice");
+    router.push("/project");
   } else {
     alert("작성에 실패했습니다.");
   }
@@ -52,5 +65,5 @@ const sendNotice = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import "~~/assets/styles/pages/notice/write/styles.scss";
+@import "~~/assets/styles/pages/project/write/styles.scss";
 </style>

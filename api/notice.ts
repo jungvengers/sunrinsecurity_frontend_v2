@@ -1,12 +1,10 @@
 import { getAPI } from "~~/composables/getAPI";
-import { CreateNotice, NoticeDetail } from "~~/interfaces/notice.interface";
+import { CreateNotice } from "~~/interfaces/notice.interface";
 
-export async function createNotice(
-  params: CreateNotice,
-): Promise<NoticeDetail> {
-  const { data } = await getAPI("/Notice", {
+export async function createNotice(params: CreateNotice): Promise<any> {
+  const res = await getAPI("/Notice", {
     method: "POST",
     data: params,
   });
-  return data;
+  return res;
 }
