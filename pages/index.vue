@@ -7,7 +7,7 @@
           정보보호과
           <img src="@/assets/images/logo.svg" />
         </h1>
-        <p class="sub_title">우리는 陰地에서 일하고 陽地를 指向한다</p>
+        <p class="sub_title">Information-Security</p>
       </div>
     </div>
   </div>

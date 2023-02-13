@@ -11,4 +11,8 @@ export default [
     name: "동아리 소개",
     path: "/club",
   },
+  {
+    name: "동아리 지원",
+    path: "/apply",
+  },
 ];

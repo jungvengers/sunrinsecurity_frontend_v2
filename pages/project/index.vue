@@ -23,7 +23,7 @@
             <p><span>참가자</span> {{ content.participant }}</p>
             <p><span>분야</span> {{ content.type }}</p>
             <p>
-              <span>한 줄 소개</span>
+              <span>소개</span>
               {{ content.description }}
             </p>
           </div>
