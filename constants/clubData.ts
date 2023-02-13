@@ -20,7 +20,7 @@ const clubData: ClubData = {
     description: "asdf",
     curriculum: "asdf",
     image: unifox,
-    site: "https://unifox.kr",
+    site: "http://unifox.kr",
     facebook: "https://www.facebook.com/UnifoxToTheWorld",
   },
   teamlog: {
@@ -36,7 +36,7 @@ const clubData: ClubData = {
     description: "asdf",
     curriculum: "asdf",
     image: nefus,
-    site: "https://nefus.kr",
+    site: "http://nefus.kr",
     facebook: "https://www.facebook.com/sunrinefus",
   },
   emotion: {
@@ -44,7 +44,7 @@ const clubData: ClubData = {
     description: "asdf",
     curriculum: "asdf",
     image: emotion,
-    site: "https://ernotion.kr",
+    site: "http://ernotion.kr",
     facebook: "https://www.facebook.com/sunrinemotion",
   },
 };
