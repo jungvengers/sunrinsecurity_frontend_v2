@@ -2,13 +2,11 @@
 export default defineNuxtConfig({
   ssr: false,
   modules: ["@pinia/nuxt"],
-  css: ["~/assets/styles/global.scss"],
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData:
-            '@import "@/assets/styles/_variables.scss";@import "@/assets/styles/_fonts.scss";@import "@/assets/styles/_animations.scss";',
+          additionalData: '@import "@/assets/styles/global.scss";',
         },
       },
     },
