@@ -15,8 +15,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      BaseUrl: process.env.BASE_URL ?? "http://localhost:3000",
-      ServiceDomain: process.env.SERVICE_DOMAIN ?? "http://localhost:8080",
+      BaseUrl: process.env.BASE_URL,
+      ServiceDomain: process.env.SERVICE_DOMAIN,
     },
   },
 });

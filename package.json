@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev -p 8080",
+    "dev": "nuxt dev",
     "lint": "eslint \"{pages,components,layouts,assets/datas}/**/*.{ts,vue}\" --fix",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

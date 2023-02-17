@@ -2,12 +2,7 @@
   <div>
     <div class="title">
       <input v-model="title" type="text" placeholder="제목" />
-      <input
-        v-model="notice.author"
-        type="text"
-        placeholder="작성자"
-        readonly
-      />
+      <input v-model="author" type="text" placeholder="작성자" />
     </div>
     <editor
       v-model="content"
@@ -33,28 +28,23 @@
 
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
-import { editNotice } from "~~/api/notice";
-
-definePageMeta({
-  middleware: ["auth"],
-});
+import { createNotice } from "~~/api/notice";
 
 const router = useRouter();
-const route = useRoute();
 
-const notice = await getNoticeDetail(route.query.id as string);
-
-let title = ref(notice.title);
-let content = ref(notice.content);
+let title = ref("");
+let author = ref("");
+let content = ref("");
 
 const sendNotice = async () => {
   const data = {
     title: title.value,
+    author: author.value,
     content: content.value,
   };
-  const res = await editNotice(notice.id, data);
+  const res = await createNotice(data);
   if (res.status === 200) {
-    router.push(`/notice/${notice.id}`);
+    router.push("/notice");
   } else {
     alert("작성에 실패했습니다.");
   }

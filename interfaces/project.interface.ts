@@ -13,8 +13,8 @@ export interface CreateProject {
   name: string;
   type: string;
   description: string;
-  participants: string;
-  detail: string;
+  participant: string;
+  content: string;
 }
 
 export interface ProjectDetail {
