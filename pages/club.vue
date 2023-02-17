@@ -50,6 +50,7 @@
 </template>
 
 <script lang="ts" setup>
+import { ObjectType } from "typescript";
 import clubData from "~~/constants/clubData";
 
 const route = useRoute();

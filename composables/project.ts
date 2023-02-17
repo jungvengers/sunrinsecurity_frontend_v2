@@ -1,12 +1,7 @@
 import { getAPI } from "./getAPI";
-import { ProjectDetail, ProjectList } from "~~/interfaces/project.interface";
+import { ProjectList } from "~~/interfaces/project.interface";
 
-export const getProjectList = async (
-  page: number,
-): Promise<{
-  items: ProjectList[];
-  count: number;
-}> => {
+export const getProjectList = async (page: number): Promise<ProjectList[]> => {
   try {
     const { data } = await getAPI.get(`/Project?page=${page}`);
     return data;
@@ -18,15 +13,6 @@ export const getProjectList = async (
 export const getProjectListAll = async (): Promise<ProjectList[]> => {
   try {
     const { data } = await getAPI.get(`/Project`);
-    return data;
-  } catch (e: any) {
-    return e;
-  }
-};
-
-export const getProjectDetail = async (id: string): Promise<ProjectDetail> => {
-  try {
-    const { data } = await getAPI.get(`/project/${id}`);
     return data;
   } catch (e: any) {
     return e;

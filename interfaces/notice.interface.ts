@@ -20,8 +20,3 @@ export interface CreateNotice {
   author: string;
   content: string;
 }
-
-export interface EditNotice {
-  title: string;
-  content: string;
-}
