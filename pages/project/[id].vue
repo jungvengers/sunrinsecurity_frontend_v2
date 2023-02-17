@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="notice_detail">
     <div class="title_panel">
@@ -16,17 +17,16 @@
       </div>
     </div>
     <div class="notice_detail_panel">
-      <p class="content">{{ content.content }}</p>
+      <p class="content" v-html="content.content"></p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
-import { getNoticeDetail } from "~~/composables/notice";
 
 const router = useRouter();
-const content = await getNoticeDetail(
+const content = await getProjectDetail(
   router.currentRoute.value.params.id as string,
 );
 </script>
