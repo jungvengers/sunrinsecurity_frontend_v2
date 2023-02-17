@@ -19,7 +19,7 @@
           'undo redo | formatselect | bold italic backcolor | \
            alignleft aligncenter alignright alignjustify | \
            bullist numlist outdent indent | removeformat | help',
-        content_style: 'div {background-color: $grayscale_40;}',
+        content_style: 'div {background-color: #000000;}',
       }"
     />
     <button @click="sendNotice()">작성완료</button>
@@ -30,11 +30,15 @@
 import Editor from "@tinymce/tinymce-vue";
 import { createNotice } from "~~/api/notice";
 
-const router = useRouter();
+definePageMeta({
+  middleware: ["auth"],
+});
 
 let title = ref("");
 let author = ref("");
 let content = ref("");
+
+const router = useRouter();
 
 const sendNotice = async () => {
   const data = {
@@ -43,7 +47,7 @@ const sendNotice = async () => {
     content: content.value,
   };
   const res = await createNotice(data);
-  if (res.status === 200) {
+  if (res.status === 201) {
     router.push("/notice");
   } else {
     alert("작성에 실패했습니다.");

@@ -1,6 +1,6 @@
 <template>
   <div class="admin_login">
-    <h1>관리자 로그인</h1>
+    <h1>로그인</h1>
     <div class="form">
       <p>아이디</p>
       <input
@@ -19,10 +19,13 @@
       />
     </div>
     <button class="login_btn" @click="login()">로그인</button>
+    <a :href="config.public.BaseUrl + '/auth/google'">Google 로그인</a>
   </div>
 </template>
 
 <script lang="ts" setup>
+const config = useRuntimeConfig();
+
 definePageMeta({
   layout: "admin",
 });
