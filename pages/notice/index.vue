@@ -40,12 +40,20 @@
 <script lang="ts" setup>
 import noticeCategoryList from "~~/constants/noticeCategoryList";
 import { getNoticeList } from "~~/composables/notice";
+import { NoticeList } from "~~/interfaces/notice.interface";
 
 const router = useRouter();
+const route = useRoute();
 
-let pageCount = ref(1);
+const page = computed(() => parseInt(route.query.page as string) || 1);
+const noticeList = ref<NoticeList[]>([]);
+const pageCount = ref<number>(0);
 
-const noticeList = await getNoticeList(pageCount.value);
+watchEffect(async () => {
+  const { items, count } = await getNoticeList(page.value);
+  noticeList.value = items;
+  pageCount.value = count;
+});
 </script>
 
 <style lang="scss" scoped>

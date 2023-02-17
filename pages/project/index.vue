@@ -7,12 +7,17 @@
           정보보호과 학생들이 진행한 프로젝트를 확인할 수 있는 페이지입니다.
         </h2>
       </div>
-      <button class="write_notice" @click="router.push('/notice/write')">
+      <button class="write_notice" @click="router.push('/project/write')">
         글쓰기
       </button>
     </div>
     <div class="project_panel">
-      <div v-for="(content, n) in contents" :key="n" class="project_item">
+      <div
+        v-for="(content, n) in projectList"
+        :key="n"
+        class="project_item"
+        @click="router.push(`/project/${content.id}`)"
+      >
         <div class="img_panel">
           <img :src="content.image" />
         </div>
@@ -35,12 +40,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import { getProjectList } from "~~/composables/project";
+import { ProjectList } from "~~/interfaces/project.interface";
 
-const pageCount = 1;
-const contents = await getProjectList(pageCount);
 const router = useRouter();
+const route = useRoute();
+
+const page = computed(() => parseInt(route.query.page as string) || 1);
+const projectList = ref<ProjectList[]>([]);
+const pageCount = ref<number>(1);
+
+watchEffect(async () => {
+  const { items, count } = await getProjectList(page.value);
+  projectList.value = items;
+  pageCount.value = count;
+});
 </script>
 
 <style lang="scss" scoped>
