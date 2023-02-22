@@ -21,6 +21,7 @@
       </template>
     </div>
     <div class="submit_panel">
+      <button v-if="route.query.edit" @click="_delete()">삭제</button>
       <button @click="submit()">
         제출
         <img src="@/assets/images/check.svg" />
@@ -32,8 +33,8 @@
 <script lang="ts" setup>
 import clubData from "~~/constants/clubData";
 import { getClubList } from "~~/composables/club";
-import { getQuestionList } from "~~/composables/apply";
-import { createAnswer, editAnswer } from "~~/api/apply";
+import { getQuestionList, getAnswer } from "~~/composables/apply";
+import { createAnswer, editAnswer, deleteAnswer } from "~~/api/apply";
 import { FormAnswer } from "~~/interfaces/apply.interface";
 
 const route = useRoute();
@@ -57,24 +58,47 @@ const club = computed(() => {
   const name = (route.query.club as string).toLowerCase();
   return clubData[name] ?? router.push("/apply");
 });
+const clubId = clubList.filter((i) => i.name === club.value.name)[0].id ?? 1;
 
-const questionList = Object.values(
-  await getQuestionList(
-    clubList.filter((i) => i.name === club.value.name)[0].id | 1,
-  ),
-)
+const questionList = Object.values(await getQuestionList(clubId))
   .filter((i) => i !== null)
   .slice(1);
 
-const submit = () => {
+const answer = await getAnswer(clubId);
+
+if (answer) {
+  for (let i = 1; i <= 10; i++) {
+    answers[`answer${i}`] = answer[`answer${i}`];
+  }
+}
+
+const submit = async () => {
   const answer: FormAnswer = {
     clubid: clubList.filter((i) => i.name === club.value.name)[0].id,
   };
   for (let i = 1; i <= 10; i++) {
     answer[`answer${i}`] = answers[`answer${i}`];
   }
-  createAnswer(answer);
+  if (route.query.edit) {
+    const res = await editAnswer(clubId, answer);
+    if (res.statusCode === 400) alert(res.message);
+    router.push("/apply");
+    return;
+  }
+  const res = await createAnswer(answer);
+  if (res.statusCode === 400) alert(res.message);
+  router.push("/apply");
 };
+
+const _delete = async () => {
+  const res = await deleteAnswer(clubId);
+  if (res.statusCode === 400) alert(res.message);
+  router.push("/apply");
+};
+
+definePageMeta({
+  middleware: ["auth"],
+});
 </script>
 
 <style lang="scss" scoped>

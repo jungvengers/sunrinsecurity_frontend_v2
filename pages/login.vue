@@ -18,8 +18,12 @@
         @keyup.enter="login()"
       />
     </div>
-    <button class="login_btn" @click="login()">로그인</button>
-    <a :href="config.public.BaseUrl + '/auth/google'">Google 로그인</a>
+    <div class="button_panel">
+      <a class="google" :href="config.public.BaseUrl + '/auth/google'">
+        Google 로그인
+      </a>
+      <button class="login_btn" @click="login()">로그인</button>
+    </div>
   </div>
 </template>
 

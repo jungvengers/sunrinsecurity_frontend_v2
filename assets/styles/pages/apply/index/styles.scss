@@ -19,6 +19,37 @@
         border-radius: 8px;
       }
     }
+
+    .active {
+      .apply_club_image {
+        position: relative;
+
+        .apply_image {
+          width: 87px;
+          height: 87px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+        }
+
+        .club_image {
+          background: #222222;
+          opacity: 0.25;
+        }
+      }
+
+      p {
+        color: $grayscale_50;
+        
+        img {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    
   }
 
   .preview {

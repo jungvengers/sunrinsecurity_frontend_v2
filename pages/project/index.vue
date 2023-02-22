@@ -17,13 +17,13 @@
         @click="router.push(`/project/${content.id}`)"
       >
         <div class="img_panel">
-          <img :src="content.image" />
+          <img :src="content.image ?? projectDefaultImage" />
         </div>
         <div class="content_panel">
           <p class="title">{{ content.name }}</p>
           <div>
             <p><span>참여 동아리</span> {{ content.club }}</p>
-            <p><span>참가자</span> {{ content.participant }}</p>
+            <p><span>참가자</span> {{ content.participants }}</p>
             <p><span>분야</span> {{ content.type }}</p>
             <p>
               <span>소개</span>
@@ -39,6 +39,7 @@
 
 <script lang="ts" setup>
 import { ProjectList } from "~~/interfaces/project.interface";
+import projectDefaultImage from "~~/assets/images/projectDefault.png";
 
 const router = useRouter();
 const route = useRoute();

@@ -8,7 +8,7 @@ export const getProjectList = async (
   count: number;
 }> => {
   try {
-    const { data } = await getAPI.get(`/Project?page=${page}`);
+    const { data } = await getAPI.get(`/project?page=${page}`);
     return data;
   } catch (e: any) {
     return e;
@@ -17,7 +17,7 @@ export const getProjectList = async (
 
 export const getProjectListAll = async (): Promise<ProjectList[]> => {
   try {
-    const { data } = await getAPI.get(`/Project`);
+    const { data } = await getAPI.get(`/project`);
     return data;
   } catch (e: any) {
     return e;

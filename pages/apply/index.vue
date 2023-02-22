@@ -10,14 +10,23 @@
       <template v-for="(club, n) in clubData" :key="n">
         <div
           class="apply_club_panel"
+          :class="{ active: checkApply(club.name) }"
           @click="
-            router.push({ path: '/apply/form', query: { club: club.name } })
+            applying(club.name, checkApply(club.name) ? 'true' : undefined)
           "
         >
           <div class="apply_club_image">
+            <img
+              v-if="checkApply(club.name)"
+              src="~/assets/images/apply.svg"
+              class="apply_image"
+            />
             <img :src="club.image" class="club_image" />
           </div>
-          <p>{{ club.name }}</p>
+          <p>
+            {{ club.name }}
+            <img v-if="checkApply(club.name)" src="~/assets/images/edit.svg" />
+          </p>
         </div>
       </template>
     </div>
@@ -31,11 +40,25 @@
 
 <script lang="ts" setup>
 import clubData from "~~/constants/clubData";
+import { getApplyList } from "~~/composables/apply";
 
 const route = useRoute();
 const router = useRouter();
 
 const clubList = ["Layer7", "Unifox", "Teamlog", "Nefus", "Emotion"];
+const applyList = await getApplyList();
+
+const checkApply = (club: string) => {
+  return applyList.filter((i) => i.club.name === club).length > 0;
+};
+
+const applying = (club: string, edit?: string) => {
+  router.push({ path: "/apply/form", query: { club, edit } });
+};
+
+definePageMeta({
+  middleware: ["auth"],
+});
 </script>
 
 <style lang="scss" scoped>

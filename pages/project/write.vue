@@ -27,7 +27,7 @@
            alignleft aligncenter alignright alignjustify | \
            bullist numlist outdent indent | removeformat | image | help',
         automatic_uploads: true,
-        images_upload_url: 'http://localhost:3000/upload/',
+        images_upload_url: `${config.public.BaseUrl}/upload`,
         file_picker_types: 'image',
       }"
     />
@@ -42,9 +42,27 @@
       <label for="ex_filename">업로드</label>
       <input
         id="ex_filename"
+        ref="file"
         type="file"
         class="upload_hidden"
-        @change="fileUpload"
+        @change="fileUpload($event, fileName!)"
+      />
+    </div>
+    <div class="filebox">
+      <input
+        ref="imageName"
+        class="upload_name"
+        value="미리보기 이미지 선택"
+        disabled="true"
+      />
+
+      <label for="ex_imagename">업로드</label>
+      <input
+        id="ex_imagename"
+        ref="image"
+        type="file"
+        class="upload_hidden"
+        @change="fileUpload($event, imageName!)"
       />
     </div>
     <button @click="sendProject()">작성완료</button>
@@ -53,7 +71,10 @@
 
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
+import { uploadFile } from "~~/api/project";
 import { createProject } from "~~/api/project";
+
+const config = useRuntimeConfig();
 
 const router = useRouter();
 
@@ -63,17 +84,34 @@ let participants = ref("");
 let type = ref("");
 let description = ref("");
 let detail = ref("");
+let file = ref();
 let fileName = ref<HTMLInputElement>();
+let image = ref();
+let imageName = ref<HTMLInputElement>();
 
 const sendProject = async () => {
-  const data = {
+  const data: any = {
     name: name.value,
     club: club.value,
     participants: participants.value,
     type: type.value,
     description: description.value,
     detail: detail.value,
+    attach: [],
+    image: "",
   };
+  if (file.value) {
+    const fileData = new FormData();
+    fileData.append("file", file.value.files[0]);
+    const fileUrl = await uploadFile(fileData);
+    data.attach.push(fileUrl);
+  }
+  if (image.value) {
+    const imageData = new FormData();
+    imageData.append("file", image.value.files[0]);
+    const imageUrl = await uploadFile(imageData);
+    data.image = imageUrl;
+  }
   const res = await createProject(data);
   if (res.status === 201) {
     router.push("/project");
@@ -82,10 +120,10 @@ const sendProject = async () => {
   }
 };
 
-const fileUpload = (e: Event) => {
+const fileUpload = (e: Event, name: HTMLInputElement) => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (file) {
-    (fileName.value as HTMLInputElement).value = file.name;
+    name.value = file.name;
   }
 };
 

@@ -16,3 +16,10 @@ export async function editNotice(id: number, params: EditNotice): Promise<any> {
   }).catch((err) => err.response.data);
   return res;
 }
+
+export async function deleteNotice(id: number): Promise<any> {
+  const res = await getAPI(`/notice/${id}`, {
+    method: "DELETE",
+  }).catch((err) => err.response.data);
+  return res;
+}

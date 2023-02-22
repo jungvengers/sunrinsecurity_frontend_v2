@@ -18,8 +18,11 @@
         toolbar:
           'undo redo | formatselect | bold italic backcolor | \
            alignleft aligncenter alignright alignjustify | \
-           bullist numlist outdent indent | removeformat | help',
+           bullist numlist outdent indent | removeformat | image | help',
         content_style: 'div {background-color: #000000;}',
+        automatic_uploads: true,
+        images_upload_url: `${config.public.BaseUrl}/upload`,
+        file_picker_types: 'image',
       }"
     />
     <button @click="sendNotice()">작성완료</button>
@@ -30,14 +33,11 @@
 import Editor from "@tinymce/tinymce-vue";
 import { createNotice } from "~~/api/notice";
 
-definePageMeta({
-  middleware: ["auth"],
-});
-
 let title = ref("");
 let author = ref("");
 let content = ref("");
 
+const config = useRuntimeConfig();
 const router = useRouter();
 
 const sendNotice = async () => {
@@ -53,6 +53,10 @@ const sendNotice = async () => {
     alert("작성에 실패했습니다.");
   }
 };
+
+definePageMeta({
+  middleware: ["auth", "admin"],
+});
 </script>
 
 <style lang="scss" scoped>

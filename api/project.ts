@@ -2,9 +2,24 @@ import { getAPI } from "~~/composables/getAPI";
 import { CreateProject } from "~~/interfaces/project.interface";
 
 export async function createProject(params: CreateProject): Promise<any> {
-  const res = await getAPI("/Project", {
+  const res = await getAPI("/project", {
     method: "POST",
     data: params,
   }).catch((err) => err.response.data);
   return res;
+}
+
+export async function deleteProject(id: number): Promise<any> {
+  const res = await getAPI(`/project/${id}`, {
+    method: "DELETE",
+  }).catch((err) => err.response.data);
+  return res;
+}
+
+export async function uploadFile(params: FormData): Promise<{ url: string }> {
+  const { data } = await getAPI("/upload", {
+    method: "POST",
+    data: params,
+  }).catch((err) => err.response.data);
+  return data.location;
 }

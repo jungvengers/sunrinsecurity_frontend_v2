@@ -5,7 +5,7 @@ export interface ProjectList {
   type: string;
   image: string;
   description: string;
-  participant: string;
+  participants: string;
 }
 
 export interface CreateProject {
@@ -23,7 +23,8 @@ export interface ProjectDetail {
   name: string;
   type: string;
   description: string;
-  participant: string;
-  content: string;
+  participants: string;
+  detail: string;
+  attach: string[];
   createdAt: string;
 }

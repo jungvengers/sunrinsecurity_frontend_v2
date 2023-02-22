@@ -51,13 +51,29 @@ const club = computed(() => {
   return clubData[name] || clubData.layer7;
 });
 
-const questionList = Object.values(
-  await getQuestionList(
-    clubList.filter((i) => i.name === club.value.name)[0].id | 1,
-  ),
-)
-  .filter((i) => i !== null)
-  .slice(1);
+const questionList = ref(
+  Object.values(
+    await getQuestionList(
+      clubList.filter((i) => i.name === club.value.name)[0].id ?? 1,
+    ),
+  )
+    .filter((i) => i !== null)
+    .slice(1),
+);
+
+// get questionList one more when change query
+watch(
+  () => route.query.name,
+  async () => {
+    questionList.value = Object.values(
+      await getQuestionList(
+        clubList.filter((i) => i.name === club.value.name)[0].id ?? 1,
+      ),
+    )
+      .filter((i) => i !== null)
+      .slice(1);
+  },
+);
 </script>
 
 <style lang="scss" scoped>
