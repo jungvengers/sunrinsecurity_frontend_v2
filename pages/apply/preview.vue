@@ -14,9 +14,7 @@
         <h1 class="name">{{ club.name }}</h1>
         <div v-for="(i, n) in questionList" :key="n" class="question">
           <p>질문 {{ n + 1 }}</p>
-          <p>
-            <span>{{ i.question }}</span> {{ i.maxLength }}자 이내
-          </p>
+          <p>{{ i }}</p>
         </div>
       </div>
     </div>
@@ -25,14 +23,14 @@
         <NuxtLink
           v-for="(i, n) in clubList"
           :key="n"
-          :to="{ query: { name: i.toLowerCase() } }"
+          :to="{ query: { name: i.name.toLowerCase() } }"
           class="club_list_item"
           :class="{
             active:
-              i.toLowerCase() === route.query.name ||
+              i.name.toLowerCase() === route.query.name ||
               (!route.query.name && n === 0),
           }"
-          >{{ i }}</NuxtLink
+          >{{ i.name }}</NuxtLink
         >
       </div>
     </div>
@@ -41,37 +39,25 @@
 
 <script lang="ts" setup>
 import clubData from "~~/constants/clubData";
+import { getClubList } from "~~/composables/club";
+import { getQuestionList } from "~~/composables/apply";
 
 const route = useRoute();
 const router = useRouter();
 
-const clubList = ["Layer7", "Unifox", "Teamlog", "Nefus", "Emotion"];
+const clubList = await getClubList();
 const club = computed(() => {
   const name = route.query.name as string;
   return clubData[name] || clubData.layer7;
 });
-const questionList = [
-  {
-    question: "질문1",
-    maxLength: 600,
-  },
-  {
-    question: "질문2",
-    maxLength: 400,
-  },
-  {
-    question: "질문3",
-    maxLength: 500,
-  },
-  {
-    question: "질문4",
-    maxLength: 300,
-  },
-  {
-    question: "질문5",
-    maxLength: 200,
-  },
-];
+
+const questionList = Object.values(
+  await getQuestionList(
+    clubList.filter((i) => i.name === club.value.name)[0].id | 1,
+  ),
+)
+  .filter((i) => i !== null)
+  .slice(1);
 </script>
 
 <style lang="scss" scoped>

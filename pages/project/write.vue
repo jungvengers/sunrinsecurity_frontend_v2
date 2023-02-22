@@ -23,7 +23,7 @@
           'insertdatetime media table paste code help wordcount',
         ],
         toolbar:
-          'undo redo | formatselect | bold italic backcolor | \
+          'undo redo | formatselect | bold italic | \
            alignleft aligncenter alignright alignjustify | \
            bullist numlist outdent indent | removeformat | image | help',
         automatic_uploads: true,
@@ -31,6 +31,22 @@
         file_picker_types: 'image',
       }"
     />
+    <div class="filebox">
+      <input
+        ref="fileName"
+        class="upload_name"
+        value="파일선택"
+        disabled="true"
+      />
+
+      <label for="ex_filename">업로드</label>
+      <input
+        id="ex_filename"
+        type="file"
+        class="upload_hidden"
+        @change="fileUpload"
+      />
+    </div>
     <button @click="sendProject()">작성완료</button>
   </div>
 </template>
@@ -38,10 +54,6 @@
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
 import { createProject } from "~~/api/project";
-
-definePageMeta({
-  middleware: ["auth"],
-});
 
 const router = useRouter();
 
@@ -51,6 +63,7 @@ let participants = ref("");
 let type = ref("");
 let description = ref("");
 let detail = ref("");
+let fileName = ref<HTMLInputElement>();
 
 const sendProject = async () => {
   const data = {
@@ -68,6 +81,17 @@ const sendProject = async () => {
     alert("작성에 실패했습니다.");
   }
 };
+
+const fileUpload = (e: Event) => {
+  const file = (e.target as HTMLInputElement).files?.[0];
+  if (file) {
+    (fileName.value as HTMLInputElement).value = file.name;
+  }
+};
+
+definePageMeta({
+  middleware: ["auth"],
+});
 </script>
 
 <style lang="scss" scoped>

@@ -3,7 +3,7 @@ import unifox from "../assets/images/unifox.png";
 import teamlog from "../assets/images/teamlog.png";
 import nefus from "../assets/images/nefus.png";
 import emotion from "../assets/images/emotion.png";
-import ClubData from "~~/interfaces/club.interface";
+import { ClubData } from "~~/interfaces/club.interface";
 
 const clubData: ClubData = {
   layer7: {

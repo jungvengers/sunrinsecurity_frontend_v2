@@ -16,6 +16,20 @@
   &:focus {
     outline: none;
   }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $grayscale_50;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $grayscale_30;
+    border-radius: 4px;
+  }
 }
 
 #app {

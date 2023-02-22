@@ -1,4 +1,4 @@
-export default interface ClubData {
+export interface ClubData {
   [key: string]: {
     name: string;
     description: string;
@@ -7,4 +7,9 @@ export default interface ClubData {
     site: string;
     facebook: string;
   };
+}
+
+export interface ClubList {
+  id: number;
+  name: string;
 }
