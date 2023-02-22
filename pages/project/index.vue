@@ -7,7 +7,12 @@
           정보보호과 학생들이 진행한 프로젝트를 확인할 수 있는 페이지입니다.
         </h2>
       </div>
-      <NuxtLink class="write_notice" :to="'/project/write'">글쓰기</NuxtLink>
+      <NuxtLink
+        v-if="store.role !== 'none'"
+        class="write_notice"
+        :to="'/project/write'"
+        >글쓰기</NuxtLink
+      >
     </div>
     <div class="project_panel">
       <div
@@ -40,9 +45,11 @@
 <script lang="ts" setup>
 import { ProjectList } from "~~/interfaces/project.interface";
 import projectDefaultImage from "~~/assets/images/projectDefault.png";
+import { useAdminStore } from "~~/store/admin";
 
 const router = useRouter();
 const route = useRoute();
+const store = useAdminStore();
 
 const page = computed(() => parseInt(route.query.page as string) || 1);
 const projectList = ref<ProjectList[]>([]);
@@ -52,6 +59,10 @@ watchEffect(async () => {
   const { items, count } = await getProjectList(page.value);
   projectList.value = items;
   pageCount.value = count;
+});
+
+definePageMeta({
+  middleware: ["admin"],
 });
 </script>
 

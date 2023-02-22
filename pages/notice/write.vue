@@ -55,7 +55,7 @@ const sendNotice = async () => {
 };
 
 definePageMeta({
-  middleware: ["auth", "admin"],
+  middleware: ["auth"],
 });
 </script>
 

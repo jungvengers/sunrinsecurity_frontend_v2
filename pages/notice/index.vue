@@ -7,7 +7,11 @@
           정보보호과 내에서 진행하는 행사 등 각종 소식입니다.
         </h2>
       </div>
-      <button class="write_notice" @click="router.push('/notice/write')">
+      <button
+        v-if="store.role !== 'none'"
+        class="write_notice"
+        @click="router.push('/notice/write')"
+      >
         글쓰기
       </button>
     </div>
@@ -41,9 +45,11 @@
 import noticeCategoryList from "~~/constants/noticeCategoryList";
 import { getNoticeList } from "~~/composables/notice";
 import { NoticeList } from "~~/interfaces/notice.interface";
+import { useAdminStore } from "~~/store/admin";
 
 const router = useRouter();
 const route = useRoute();
+const store = useAdminStore();
 
 const page = computed(() => parseInt(route.query.page as string) || 1);
 const noticeList = ref<NoticeList[]>([]);
@@ -53,6 +59,10 @@ watchEffect(async () => {
   const { items, count } = await getNoticeList(page.value);
   noticeList.value = items;
   pageCount.value = count;
+});
+
+definePageMeta({
+  middleware: ["admin"],
 });
 </script>
 

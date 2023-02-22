@@ -5,6 +5,6 @@ export const getAdmin = async (): Promise<any> => {
     const { data } = await getAPI.get(`/admin`);
     return data;
   } catch (e: any) {
-    return e;
+    return { role: "none" };
   }
 };
