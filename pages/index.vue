@@ -16,6 +16,7 @@
 <script setup>
 definePageMeta({
   layout: "index-page",
+  middleware: ["auth"],
 });
 </script>
 

@@ -39,11 +39,7 @@ header {
 
     .header_login {
       margin-left: auto;
-      padding: 10px;
-      font-size: 17px;
-      font-weight: $font_medium;
-      align-items: center;
-      opacity: 0.75;
+      cursor: pointer;
     }
     
     .router-link-active {

@@ -1,6 +1,6 @@
 import { getAPI } from "./getAPI";
 
-export const getAccessToken = async (): Promise<{ accessToken: String }> => {
+export const getAccessToken = async () => {
   try {
     const { data } = await getAPI.get(`/auth/refresh`);
     getAPI.defaults.headers.common[
