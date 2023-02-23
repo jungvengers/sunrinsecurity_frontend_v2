@@ -7,7 +7,7 @@
           정보보호과
           <img src="@/assets/images/logo.svg" />
         </h1>
-        <p class="sub_title">Information-Security</p>
+        <p class="sub_title">Computer-Security</p>
       </div>
     </div>
   </div>
