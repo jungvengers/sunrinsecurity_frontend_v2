@@ -36,6 +36,15 @@ header {
         height: 31px;
       }
     }
+
+    .header_login {
+      margin-left: auto;
+      padding: 10px;
+      font-size: 17px;
+      font-weight: $font_medium;
+      align-items: center;
+      opacity: 0.75;
+    }
     
     .router-link-active {
       opacity: 1 !important;

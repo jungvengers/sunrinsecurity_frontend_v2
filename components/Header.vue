@@ -11,6 +11,7 @@
         :to="i.path"
         >{{ i.name }}</NuxtLink
       >
+      <NuxtLink to="/login" class="header_login header_menu">로그인</NuxtLink>
     </div>
   </header>
 </template>
