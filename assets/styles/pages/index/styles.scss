@@ -7,9 +7,10 @@
   bottom: 0;
   right: 0;
   z-index: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("@/assets/images/background.png");
-  background-size: 1920px 1080px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("@/assets/images/background.jpeg");
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
 
   .main_panel {
     user-select: none;
