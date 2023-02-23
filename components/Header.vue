@@ -17,7 +17,7 @@
         class="header_login header_menu"
         >로그인</NuxtLink
       >
-      <NuxtLink v-else class="header_login header_menu" @click="logout()">
+      <NuxtLink v-else class="header_login header_menu" @click="_logout()">
         로그아웃
       </NuxtLink>
     </div>
@@ -27,10 +27,12 @@
 <script lang="ts" setup>
 import headerMenuList from "~~/constants/headerMenuList";
 import { useAuthStore } from "~~/store/auth";
+import { logout } from "~~/api/auth";
 
 const authStore = useAuthStore();
-const logout = () => {
-  console.log("logout");
+const _logout = () => {
+  logout();
+  authStore.setAccessToken("");
 };
 </script>
 
