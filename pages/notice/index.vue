@@ -7,30 +7,18 @@
           정보보호과 내에서 진행하는 행사 등 각종 소식입니다.
         </h2>
       </div>
-      <button
-        v-if="store.role !== 'none'"
-        class="write_notice"
-        @click="router.push('/notice/write')"
-      >
+      <button v-if="store.role !== 'none'" class="write_notice" @click="router.push('/notice/write')">
         글쓰기
       </button>
     </div>
     <div class="notice_list_panel">
       <div class="category">
-        <div
-          v-for="(noticeCategory, n) in noticeCategoryList"
-          :key="n"
-          class="category_item"
-        >
+        <div v-for="(noticeCategory, n) in noticeCategoryList" :key="n" class="category_item">
           {{ noticeCategory }}
         </div>
       </div>
-      <div
-        v-for="(noticeItem, n) in noticeList"
-        :key="n"
-        class="notice_list_item"
-        @click="router.push(`/notice/${noticeItem.id}`)"
-      >
+      <div v-for="(noticeItem, n) in noticeList" :key="n" class="notice_list_item"
+        @click="router.push(`/notice/${noticeItem.id}`)">
         <p>{{ noticeItem.id }}</p>
         <p>{{ noticeItem.title }}</p>
         <p>{{ noticeItem.author }}</p>
@@ -62,7 +50,7 @@ watchEffect(async () => {
 });
 
 definePageMeta({
-  middleware: ["admin"],
+  middleware: ["auth", "admin"],
 });
 </script>
 
