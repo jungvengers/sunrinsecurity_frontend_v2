@@ -30,13 +30,14 @@
       }"
     />
     <button @click="sendProject()">작성완료</button>
+    <button @click="_delete()">삭제</button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
 import { editNotice } from "~~/api/notice";
-import { editProject } from "~~/api/project";
+import { deleteProject, editProject } from "~~/api/project";
 
 definePageMeta({
   middleware: ["auth"],
@@ -68,6 +69,15 @@ const sendProject = async () => {
     router.push(`/project/${project.id}`);
   } else {
     alert("작성에 실패했습니다.");
+  }
+};
+
+const _delete = async () => {
+  const res = await deleteProject(project.id);
+  if (res.status === 200) {
+    router.push(`/notice`);
+  } else {
+    alert("삭제에 실패했습니다.");
   }
 };
 </script>

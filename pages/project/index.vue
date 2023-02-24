@@ -32,13 +32,6 @@
               {{ content.description }}
             </p>
           </div>
-          <NuxtLink
-            v-if="store.isAdmin"
-            class="write_notice"
-            :to="{ query: { id: content.id }, path: '/project/edit' }"
-            @click.stop
-            >수정</NuxtLink
-          >
         </div>
       </div>
     </div>
