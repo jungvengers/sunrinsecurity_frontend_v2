@@ -1,16 +1,18 @@
 <template>
   <div>
     <div class="title">
-      <input v-model="title" type="text" placeholder="제목" />
-      <input
-        v-model="notice.author"
-        type="text"
-        placeholder="작성자"
-        readonly
-      />
+      <div class="first">
+        <input v-model="name" type="text" placeholder="프로젝트명" />
+        <input v-model="club" type="text" placeholder="참여동아리" />
+        <input v-model="participants" type="text" placeholder="참가자" />
+      </div>
+      <div class="second">
+        <input v-model="type" type="text" placeholder="분야" />
+        <input v-model="description" type="text" placeholder="한 줄 소개" />
+      </div>
     </div>
     <Editor
-      v-model="content"
+      v-model="detail"
       api-key="2jcbz2joi9s0xve80mqmeilcqhjfyn3204335n94uxrftan1"
       :init="{
         height: 500,
@@ -27,13 +29,14 @@
         content_style: 'div {background-color: $grayscale_40;}',
       }"
     />
-    <button @click="sendNotice()">작성완료</button>
+    <button @click="sendProject()">작성완료</button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
 import { editNotice } from "~~/api/notice";
+import { editProject } from "~~/api/project";
 
 definePageMeta({
   middleware: ["auth"],
@@ -42,19 +45,27 @@ definePageMeta({
 const router = useRouter();
 const route = useRoute();
 
-const notice = await getNoticeDetail(route.query.id as string);
+const project = await getProjectDetail(route.query.id as string);
 
-let title = ref(notice.title);
-let content = ref(notice.content);
+let name = ref(project.name);
+let club = ref(project.club);
+let participants = ref(project.participants);
+let type = ref(project.type);
+let description = ref(project.description);
+let detail = ref(project.detail);
 
-const sendNotice = async () => {
+const sendProject = async () => {
   const data = {
-    title: title.value,
-    content: content.value,
+    name: name.value,
+    club: club.value,
+    participants: participants.value,
+    type: type.value,
+    description: description.value,
+    detail: detail.value,
   };
-  const res = await editNotice(notice.id, data);
+  const res = await editProject(project.id, data);
   if (res.status === 200) {
-    router.push(`/notice/${notice.id}`);
+    router.push(`/project/${project.id}`);
   } else {
     alert("작성에 실패했습니다.");
   }
@@ -62,5 +73,5 @@ const sendNotice = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import "~~/assets/styles/pages/notice/write/styles.scss";
+@import "~~/assets/styles/pages/project/write/styles.scss";
 </style>

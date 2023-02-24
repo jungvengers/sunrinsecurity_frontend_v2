@@ -52,8 +52,6 @@
 </template>
 
 <script lang="ts" setup>
-import clubData from "~~/constants/clubData";
-
 const route = useRoute();
 const router = useRouter();
 

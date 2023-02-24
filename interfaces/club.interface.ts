@@ -9,7 +9,9 @@ export interface ClubData {
   };
 }
 
-export interface ClubList {
+export type ClubList = Club[];
+
+export interface Club {
   id: number;
   name: string;
   description: string;

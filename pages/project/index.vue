@@ -7,11 +7,17 @@
           정보보호과 학생들이 진행한 프로젝트를 확인할 수 있는 페이지입니다.
         </h2>
       </div>
-      <NuxtLink v-if="store.role !== 'none'" class="write_notice" :to="'/project/write'">글쓰기</NuxtLink>
+      <NuxtLink v-if="store.isAdmin" class="write_notice" :to="'/project/write'"
+        >글쓰기</NuxtLink
+      >
     </div>
     <div class="project_panel">
-      <div v-for="(content, n) in projectList" :key="n" class="project_item"
-        @click="router.push(`/project/${content.id}`)">
+      <div
+        v-for="(content, n) in projectList"
+        :key="n"
+        class="project_item"
+        @click="router.push(`/project/${content.id}`)"
+      >
         <div class="img_panel">
           <img :src="content.image ?? projectDefaultImage" />
         </div>
@@ -26,6 +32,13 @@
               {{ content.description }}
             </p>
           </div>
+          <NuxtLink
+            v-if="store.isAdmin"
+            class="write_notice"
+            :to="{ query: { id: content.id }, path: '/project/edit' }"
+            @click.stop
+            >수정</NuxtLink
+          >
         </div>
       </div>
     </div>
