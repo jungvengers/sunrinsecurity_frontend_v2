@@ -12,4 +12,8 @@ export interface ClubData {
 export interface ClubList {
   id: number;
   name: string;
+  description: string;
+  curriculum: string;
+  image: string;
+  links: { image: string; name: string; link: string }[];
 }
