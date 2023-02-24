@@ -30,6 +30,7 @@ export const Questions = [
 
 export interface FormAnswer {
   clubid: number;
+  phone: string;
   [key: string]: string | number;
 }
 
@@ -41,7 +42,7 @@ export interface ApplyList {
 }
 
 export type Answer = {
-  [key in typeof Answers[number]]: string;
+  [key in typeof Answers[number] | "phone"]: string;
 };
 
 export const Answers = [

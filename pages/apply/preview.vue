@@ -23,12 +23,11 @@
         <NuxtLink
           v-for="(i, n) in clubList"
           :key="n"
-          :to="{ query: { name: i.name.toLowerCase() } }"
+          :to="{ query: { name: i.name } }"
           class="club_list_item"
           :class="{
             active:
-              i.name.toLowerCase() === route.query.name ||
-              (!route.query.name && n === 0),
+              i.name === route.query.name || (!route.query.name && n === 0),
           }"
           >{{ i.name }}</NuxtLink
         >
@@ -48,7 +47,7 @@ const router = useRouter();
 const clubList = await getClubList();
 const club = computed(() => {
   const name = route.query.name as string;
-  return clubList.find((x) => x.name.toLowerCase() == name) || clubList[0];
+  return clubList.find((x) => x.name == name) || clubList[0];
 });
 
 const questionList = ref();

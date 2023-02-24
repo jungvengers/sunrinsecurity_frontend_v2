@@ -28,11 +28,15 @@
 import headerMenuList from "~~/constants/headerMenuList";
 import { useAuthStore } from "~~/store/auth";
 import { logout } from "~~/api/auth";
+import { useAdminStore } from "~~/store/admin";
 
 const authStore = useAuthStore();
+const adminStore = useAdminStore();
+
 const _logout = () => {
   logout();
   authStore.setAccessToken("");
+  adminStore.role = "none";
 };
 </script>
 

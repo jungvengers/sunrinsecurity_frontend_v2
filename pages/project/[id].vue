@@ -37,10 +37,9 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 
+const route = useRoute();
 const router = useRouter();
-const content = await getProjectDetail(
-  router.currentRoute.value.params.id as string,
-);
+const content = await getProjectDetail(route.params.id as string);
 </script>
 
 <style lang="scss" scoped>
