@@ -29,7 +29,15 @@
       </template>
     </div>
     <div class="preview">
-      <button @click="router.push('/apply/preview')">
+      <button
+        v-if="admin.isAdmin"
+        @click="
+          router.push({ query: { club: admin.role }, path: '/apply/admin' })
+        "
+      >
+        동아리 질문 수정하기
+      </button>
+      <button v-else @click="router.push('/apply/preview')">
         동아리별 질문 미리보기
       </button>
     </div>
@@ -38,9 +46,12 @@
 
 <script lang="ts" setup>
 import { getApplyList } from "~~/composables/apply";
+import { useAdminStore } from "~~/store/admin";
 
 const route = useRoute();
 const router = useRouter();
+
+const admin = useAdminStore();
 
 const applyList = await getApplyList();
 const clubList = await getClubList();
@@ -55,7 +66,7 @@ const apply = (club: string) => {
 };
 
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ["auth", "admin"],
 });
 </script>
 

@@ -74,7 +74,7 @@
 import { getClubList } from "~~/composables/club";
 import { getQuestionList, getAnswer } from "~~/composables/apply";
 import { createAnswer, editAnswer, deleteAnswer } from "~~/api/apply";
-import { Answers, FormAnswer } from "~~/interfaces/apply.interface";
+import { Answers, FormAnswer, Questions } from "~~/interfaces/apply.interface";
 
 const route = useRoute();
 const router = useRouter();
@@ -85,11 +85,8 @@ const club = computed(() => {
   const name = route.query.club as string;
   return clubList.find((x) => x.name == name) || clubList[0];
 });
-console.log(club);
-const clubId = clubList.filter((i) => i.name === club.value.name)[0].id ?? 1;
-const questionList = Object.values(await getQuestionList(clubId))
-  .filter((i) => i !== null)
-  .slice(1);
+const clubId = club.value.id ?? 1;
+const questionList = await getQuestions(clubId);
 const answer = await getAnswer(clubId);
 
 const phone = ref(answer.phone ?? "");
@@ -135,6 +132,15 @@ const _delete = async () => {
   if (res.statusCode === 400) alert(res.message);
   router.push("/apply");
 };
+
+async function getQuestions(id: number) {
+  const questions = await getQuestionList(id);
+  return Questions.map((x) => questions[x]).filter((x) => x);
+  // return Object.entries(await getQuestionList(id))
+  //   .filter((x) => Questions.includes(x[0]))
+  //   .filter((x) => x[1])
+  //   .map((x) => x[1]);
+}
 
 definePageMeta({
   middleware: ["auth"],
