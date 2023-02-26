@@ -30,17 +30,44 @@
           >
         </div>
       </div>
+      <div class="notice_function">
+        <button
+          v-if="admin.isAdmin"
+          class="btn"
+          @click="router.push({ query: { id }, path: `/project/edit` })"
+        >
+          수정하기
+        </button>
+        <button v-if="admin.isAdmin" class="btn" @click="_delete()">
+          삭제하기
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
+import { deleteProject } from "~~/api/project";
+import { useAdminStore } from "~~/store/admin";
 
+const route = useRoute();
 const router = useRouter();
-const content = await getProjectDetail(
-  router.currentRoute.value.params.id as string,
-);
+
+const admin = useAdminStore();
+
+const id = computed(() => route.params.id as string);
+
+const content = await getProjectDetail(route.params.id as string);
+
+const _delete = async () => {
+  const res = await deleteProject(Number(id.value));
+  if (res.status === 200) {
+    router.push(`/project`);
+  } else {
+    alert("삭제에 실패했습니다.");
+  }
+};
 </script>
 
 <style lang="scss" scoped>

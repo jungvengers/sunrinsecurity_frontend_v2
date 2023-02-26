@@ -46,3 +46,15 @@
     }
   }
 }
+
+button {
+  margin: 12px;
+  padding: 12px 18px;
+  color: $grayscale_70;
+  background-color: $grayscale_40;
+  border-radius: 8px;
+  margin-right: 8px;
+  font-size: 18px;
+  float: right;
+  cursor: pointer;
+}

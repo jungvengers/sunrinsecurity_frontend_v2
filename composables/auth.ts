@@ -11,3 +11,7 @@ export const getAccessToken = async () => {
     return e;
   }
 };
+
+export async function getUserInfo() {
+  return await getAPI.get("/auth").then((res) => res.data);
+}

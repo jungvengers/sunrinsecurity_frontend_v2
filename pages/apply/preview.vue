@@ -23,12 +23,11 @@
         <NuxtLink
           v-for="(i, n) in clubList"
           :key="n"
-          :to="{ query: { name: i.name.toLowerCase() } }"
+          :to="{ query: { name: i.name } }"
           class="club_list_item"
           :class="{
             active:
-              i.name.toLowerCase() === route.query.name ||
-              (!route.query.name && n === 0),
+              i.name === route.query.name || (!route.query.name && n === 0),
           }"
           >{{ i.name }}</NuxtLink
         >
@@ -38,9 +37,9 @@
 </template>
 
 <script lang="ts" setup>
-import clubData from "~~/constants/clubData";
 import { getClubList } from "~~/composables/club";
 import { getQuestionList } from "~~/composables/apply";
+import { Questions } from "~~/interfaces/apply.interface";
 
 const route = useRoute();
 const router = useRouter();
@@ -48,32 +47,27 @@ const router = useRouter();
 const clubList = await getClubList();
 const club = computed(() => {
   const name = route.query.name as string;
-  return clubData[name] || clubData.layer7;
+  return clubList.find((x) => x.name == name) || clubList[0];
 });
 
-const questionList = ref(
-  Object.values(
-    await getQuestionList(
-      clubList.filter((i) => i.name === club.value.name)[0].id ?? 1,
-    ),
-  )
-    .filter((i) => i !== null)
-    .slice(1),
-);
+const questionList = ref();
 
 // get questionList one more when change query
 watch(
   () => route.query.name,
-  async () => {
-    questionList.value = Object.values(
-      await getQuestionList(
-        clubList.filter((i) => i.name === club.value.name)[0].id ?? 1,
-      ),
-    )
-      .filter((i) => i !== null)
-      .slice(1);
-  },
+  () => getQuestions(club.value.id ?? 1).then((x) => (questionList.value = x)),
+  { immediate: true },
 );
+
+// questions to array
+async function getQuestions(id: number) {
+  const questions = await getQuestionList(id);
+  return Questions.map((x) => questions[x]).filter((x) => x);
+  // return Object.entries(await getQuestionList(id))
+  //   .filter((x) => Questions.includes(x[0]))
+  //   .filter((x) => x[1])
+  //   .map((x) => x[1]);
+}
 </script>
 
 <style lang="scss" scoped>

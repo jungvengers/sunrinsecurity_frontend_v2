@@ -1,5 +1,5 @@
 import { getAPI } from "~~/composables/getAPI";
-import { FormAnswer } from "~~/interfaces/apply.interface";
+import { FormAnswer, UpdateForm } from "~~/interfaces/apply.interface";
 
 export async function createAnswer(params: FormAnswer): Promise<any> {
   const res = await getAPI("/application", {
@@ -20,6 +20,14 @@ export async function editAnswer(id: number, params: FormAnswer): Promise<any> {
 export async function deleteAnswer(id: number): Promise<any> {
   const res = await getAPI(`/application/${id}`, {
     method: "DELETE",
+  }).catch((err) => err.response.data);
+  return res;
+}
+
+export async function editForm(id: number, params: UpdateForm): Promise<any> {
+  const res = await getAPI(`/form/${id}`, {
+    method: "PATCH",
+    data: params,
   }).catch((err) => err.response.data);
   return res;
 }

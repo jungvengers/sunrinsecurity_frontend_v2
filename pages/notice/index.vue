@@ -8,7 +8,7 @@
         </h2>
       </div>
       <button
-        v-if="store.role !== 'none'"
+        v-if="store.isAdmin"
         class="write_notice"
         @click="router.push('/notice/write')"
       >

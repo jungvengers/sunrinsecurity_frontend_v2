@@ -1,7 +1,7 @@
 import { getAPI } from "./getAPI";
-import { QuestionList, ApplyList, Answer } from "~~/interfaces/apply.interface";
+import { ApplyList, Answer, Form } from "~~/interfaces/apply.interface";
 
-export const getQuestionList = async (id: number): Promise<QuestionList> => {
+export const getQuestionList = async (id: number): Promise<Form> => {
   try {
     const { data } = await getAPI.get(`/form/${id}`);
     return data;

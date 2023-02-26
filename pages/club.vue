@@ -21,11 +21,13 @@
           <p>{{ club.curriculum }}</p>
         </div>
         <div class="contact">
-          <a :href="club.site" target="_blank">
-            <img src="@/assets/images/site.svg" />
-          </a>
-          <a :href="club.facebook" target="_blank">
-            <img src="@/assets/images/facebook.svg" />
+          <a
+            v-for="(x, i) in club.links"
+            :key="i"
+            :href="x.link"
+            target="_blank"
+          >
+            <img :src="x.image" />
           </a>
         </div>
       </div>
@@ -35,14 +37,14 @@
         <NuxtLink
           v-for="(i, n) in clubList"
           :key="n"
-          :to="{ query: { name: i.toLowerCase() } }"
+          :to="{ query: { name: i.name.toLowerCase() } }"
           class="club_list_item"
           :class="{
             active:
-              i.toLowerCase() === route.query.name ||
+              i.name.toLowerCase() === route.query.name ||
               (!route.query.name && n === 0),
           }"
-          >{{ i }}</NuxtLink
+          >{{ i.name }}</NuxtLink
         >
       </div>
     </div>
@@ -50,15 +52,13 @@
 </template>
 
 <script lang="ts" setup>
-import clubData from "~~/constants/clubData";
-
 const route = useRoute();
 const router = useRouter();
 
-const clubList = ["Layer7", "Unifox", "Teamlog", "Nefus", "Emotion"];
+const clubList = await getClubList();
 const club = computed(() => {
   const name = route.query.name as string;
-  return clubData[name] || clubData.layer7;
+  return clubList.find((x) => x.name.toLowerCase() == name) || clubList[0];
 });
 </script>
 

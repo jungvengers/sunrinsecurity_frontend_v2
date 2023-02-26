@@ -7,17 +7,15 @@
       </div>
     </div>
     <div class="apply_panel">
-      <template v-for="(club, n) in clubData" :key="n">
+      <template v-for="(club, n) in clubList" :key="n">
         <div
           class="apply_club_panel"
-          :class="{ active: checkApply(club.name) }"
-          @click="
-            applying(club.name, checkApply(club.name) ? 'true' : undefined)
-          "
+          :class="{ active: isApply(club.name) }"
+          @click="apply(club.name)"
         >
           <div class="apply_club_image">
             <img
-              v-if="checkApply(club.name)"
+              v-if="isApply(club.name)"
               src="~/assets/images/apply.svg"
               class="apply_image"
             />
@@ -25,13 +23,21 @@
           </div>
           <p>
             {{ club.name }}
-            <img v-if="checkApply(club.name)" src="~/assets/images/edit.svg" />
+            <img v-if="isApply(club.name)" src="~/assets/images/edit.svg" />
           </p>
         </div>
       </template>
     </div>
     <div class="preview">
-      <button @click="router.push('/apply/preview')">
+      <button
+        v-if="admin.isAdmin"
+        @click="
+          router.push({ query: { club: admin.role }, path: '/apply/admin' })
+        "
+      >
+        동아리 질문 수정하기
+      </button>
+      <button v-else @click="router.push('/apply/preview')">
         동아리별 질문 미리보기
       </button>
     </div>
@@ -39,25 +45,28 @@
 </template>
 
 <script lang="ts" setup>
-import clubData from "~~/constants/clubData";
 import { getApplyList } from "~~/composables/apply";
+import { useAdminStore } from "~~/store/admin";
 
 const route = useRoute();
 const router = useRouter();
 
-const clubList = ["Layer7", "Unifox", "Teamlog", "Nefus", "Emotion"];
-const applyList = await getApplyList();
+const admin = useAdminStore();
 
-const checkApply = (club: string) => {
+const applyList = await getApplyList();
+const clubList = await getClubList();
+
+const isApply = (club: string) => {
   return applyList.filter((i) => i.club.name === club).length > 0;
 };
 
-const applying = (club: string, edit?: string) => {
+const apply = (club: string) => {
+  const edit = isApply(club) ? "true" : undefined;
   router.push({ path: "/apply/form", query: { club, edit } });
 };
 
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ["auth", "admin"],
 });
 </script>
 

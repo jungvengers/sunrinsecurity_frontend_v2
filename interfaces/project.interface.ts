@@ -17,8 +17,17 @@ export interface CreateProject {
   detail: string;
 }
 
+export interface EditProject {
+  club: string;
+  name: string;
+  type: string;
+  description: string;
+  participants: string;
+  detail: string;
+}
+
 export interface ProjectDetail {
-  id: string;
+  id: number;
   club: string;
   name: string;
   type: string;
