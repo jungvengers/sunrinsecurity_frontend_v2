@@ -29,7 +29,6 @@ import headerMenuList from "~~/constants/headerMenuList";
 import { useAuthStore } from "~~/store/auth";
 import { useAdminStore } from "~~/store/admin";
 import { logout } from "~~/api/auth";
-import { useAdminStore } from "~~/store/admin";
 
 const authStore = useAuthStore();
 const adminStore = useAdminStore();
