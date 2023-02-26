@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="form_panel">
-      <template v-for="(i, n) in questionList" :key="n">
+      <template v-for="(i, n) in 10" :key="n">
         <div class="line">
           <div class="input_panel">
             <p>{{ `질문 ${n + 1}` }}</p>
