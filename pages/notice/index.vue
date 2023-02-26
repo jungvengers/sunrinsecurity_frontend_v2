@@ -15,7 +15,8 @@
         글쓰기
       </button>
     </div>
-    <div class="notice_list_panel">
+    <Loading v-if="isLoading" />
+    <div v-else class="notice_list_panel">
       <div class="category">
         <div
           v-for="(noticeCategory, n) in noticeCategoryList"
@@ -54,9 +55,14 @@ const store = useAdminStore();
 const page = computed(() => parseInt(route.query.page as string) || 1);
 const noticeList = ref<NoticeList[]>([]);
 const pageCount = ref<number>(0);
+const isLoading = ref(false);
 
 watchEffect(async () => {
-  const { items, count } = await getNoticeList(page.value);
+  isLoading.value = true;
+  const { items, count } = await getNoticeList(page.value).then((x) => {
+    isLoading.value = false;
+    return x;
+  });
   noticeList.value = items;
   pageCount.value = count;
 });

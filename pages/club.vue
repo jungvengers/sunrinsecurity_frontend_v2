@@ -53,7 +53,6 @@
 
 <script lang="ts" setup>
 const route = useRoute();
-const router = useRouter();
 
 const clubList = await getClubList();
 const club = computed(() => {

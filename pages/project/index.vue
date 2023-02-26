@@ -11,7 +11,8 @@
         >글쓰기</NuxtLink
       >
     </div>
-    <div class="project_panel">
+    <Loading v-if="isLoading" />
+    <div v-else class="project_panel">
       <div
         v-for="(content, n) in projectList"
         :key="n"
@@ -51,9 +52,14 @@ const store = useAdminStore();
 const page = computed(() => parseInt(route.query.page as string) || 1);
 const projectList = ref<ProjectList[]>([]);
 const pageCount = ref<number>(1);
+const isLoading = ref(false);
 
 watchEffect(async () => {
-  const { items, count } = await getProjectList(page.value);
+  isLoading.value = true;
+  const { items, count } = await getProjectList(page.value).then((x) => {
+    isLoading.value = false;
+    return x;
+  });
   projectList.value = items;
   pageCount.value = count;
 });
