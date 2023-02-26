@@ -31,20 +31,13 @@
 
 <script lang="ts" setup>
 import { getClubList } from "~~/composables/club";
-import { getQuestionList, getAnswer } from "~~/composables/apply";
-import { createAnswer, editAnswer, deleteAnswer, editForm } from "~~/api/apply";
-import {
-  Form,
-  FormAnswer,
-  Question,
-  Questions,
-  UpdateForm,
-} from "~~/interfaces/apply.interface";
+import { getQuestionList } from "~~/composables/apply";
+import { editForm } from "~~/api/apply";
+import { Question, Questions, UpdateForm } from "~~/interfaces/apply.interface";
 
 const route = useRoute();
 const router = useRouter();
 
-const info = await getUserInfo();
 const clubList = await getClubList();
 const club = computed(() => {
   const name = route.query.club as string;
