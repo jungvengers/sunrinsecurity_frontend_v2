@@ -26,6 +26,10 @@ header {
       font-weight: $font_medium;
       align-items: center;
       opacity: 0.75;
+
+      @include tablet {
+        display: none;
+      }
     }
     
     .header_logo_link {

@@ -2,7 +2,7 @@
 <template>
   <div class="notice_detail">
     <div class="title_panel">
-      <div>
+      <div class="title_panel_left">
         <h1 class="title">{{ content.title }}</h1>
         <h2 class="sub_title" @click="router.push('/notice')">
           &lt; 학과소식 페이지로

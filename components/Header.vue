@@ -27,12 +27,15 @@
 <script lang="ts" setup>
 import headerMenuList from "~~/constants/headerMenuList";
 import { useAuthStore } from "~~/store/auth";
+import { useAdminStore } from "~~/store/admin";
 import { logout } from "~~/api/auth";
 
 const authStore = useAuthStore();
+const adminStore = useAdminStore();
 const _logout = () => {
   logout();
   authStore.setAccessToken("");
+  adminStore.role = "none";
 };
 </script>
 

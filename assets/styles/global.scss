@@ -1,6 +1,7 @@
 @import "_animations";
 @import "_fonts";
 @import "_variables";
+@import "_mixins";
 
 * {
   margin: 0;
@@ -34,6 +35,10 @@
 
 #app {
   padding-top: 70px;
+
+  @include mobile {
+    padding-top: 60px;
+  }
 }
 
 body {

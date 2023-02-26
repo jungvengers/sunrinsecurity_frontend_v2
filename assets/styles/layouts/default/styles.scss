@@ -21,6 +21,10 @@
       background-color: $title_background_color;
   
       div {
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        
         .title {
           font-size: 28px;
           font-weight: $font_semi_bold;
@@ -43,7 +47,24 @@
         padding: 8px 16px;
         font-size: 16px;
         cursor: pointer;
+
+        @include tablet {
+          display: none;
+        }
       }
+
+      @include tablet {
+        padding: 28px 24px;
+      }
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    @include mobile {
+      margin: 0 !important;
+      border-radius: 0;
     }
   }
 }

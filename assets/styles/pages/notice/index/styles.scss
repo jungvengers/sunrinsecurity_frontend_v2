@@ -1,9 +1,14 @@
 @import "_variables.scss";
+@import "_mixins.scss";
 
 .notice {
   display: flex;
   flex-direction: column;
   height: 720px;
+
+  @include mobile {
+    height: 570px;
+  }
 
   .notice_list_panel {
     padding: 0 32px;
@@ -15,18 +20,20 @@
       gap: 32px;
       color: $notice_page_category_text_color;
   
-      :nth-child(1) {
-        width: 52px;
+      @include line;
+
+      @include tablet {
+        @include line_tablet;
       }
-      :nth-child(2) {
-        flex: 1;
+
+      @include mobile {
+        margin: 0;
+        padding: 12px 24px;
       }
-      :nth-child(3) {
-        width: 56px;
-      }
-      :nth-child(4) {
-        width: 96px;
-      }
+    }
+
+    @include mobile {
+      padding: 0;
     }
   }
 
@@ -37,18 +44,19 @@
     border-top: 1px solid $notice_page_thead_border_color;
     color: $notice_page_tbody_text_color;
     cursor: pointer;
+
+    p {
+      @include ellipsis;
+    }
   
-    :nth-child(1) {
-      width: 52px;
+    @include line;
+
+    @include tablet {
+      @include line_tablet;
     }
-    :nth-child(2) {
-      flex: 1;
-    }
-    :nth-child(3) {
-      width: 56px;
-    }
-    :nth-child(4) {
-      width: 96px;
+
+    @include mobile {
+      padding: 12px 24px;
     }
   }
 }
