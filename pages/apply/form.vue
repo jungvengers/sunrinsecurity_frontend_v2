@@ -114,11 +114,11 @@ const answers = ref<{ [key: string]: string }>({
 });
 
 watchEffect(() => {
-  getUserInfo().then((res) => {
-    console.log(res);
-    if (!res) router.push("/login");
-    info.value = res;
-  });
+  getUserInfo()
+    .then((res) => {
+      info.value = res;
+    })
+    .catch(() => router.push("/login"));
   getClubList().then(async (res) => {
     clubList.value = res;
     (async () => {
