@@ -8,7 +8,8 @@
         </h2>
       </div>
     </div>
-    <div class="club_panel">
+    <div v-if="!club" class="loading_wrapper"><Loading /></div>
+    <div v-else class="club_panel">
       <img :src="club.image" class="club_image" />
       <div class="club_description">
         <h1 class="name">{{ club.name }}</h1>
@@ -52,15 +53,31 @@
 </template>
 
 <script lang="ts" setup>
+import { ClubList } from "~~/interfaces/club.interface";
+
 const route = useRoute();
 
-const clubList = await getClubList();
+const clubList = ref<ClubList>();
 const club = computed(() => {
   const name = route.query.name as string;
-  return clubList.find((x) => x.name.toLowerCase() == name) || clubList[0];
+  return (
+    clubList.value?.find((x) => x.name.toLowerCase() == name) ||
+    clubList.value?.[0]
+  );
+});
+
+watchEffect(async () => {
+  clubList.value = await getClubList();
 });
 </script>
 
 <style lang="scss" scoped>
 @import "~~/assets/styles/pages/club/styles.scss";
+
+.loading_wrapper {
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
