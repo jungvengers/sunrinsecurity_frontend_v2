@@ -62,6 +62,12 @@
       </template>
     </div>
     <div class="submit_panel">
+      <NuxtLink :to="'/apply'">
+        <button>
+          취소
+          <img src="@/assets/images/close.svg" />
+        </button>
+      </NuxtLink>
       <button v-if="route.query.edit" @click="_delete()">삭제</button>
       <button @click="submit()">
         제출

@@ -31,17 +31,27 @@
           >
         </div>
       </div>
-      <div class="notice_function">
-        <button
-          v-if="admin.isAdmin"
-          class="btn"
-          @click="router.push({ query: { id }, path: `/project/edit` })"
-        >
-          수정하기
-        </button>
-        <button v-if="admin.isAdmin" class="btn" @click="_delete()">
-          삭제하기
-        </button>
+    </div>
+    <div class="notice_function">
+      <div class="paging">
+        <NuxtLink :to="prev">
+          <button class="btn">
+            <img src="@/assets/images/arrow_back.svg" />
+            이전 글
+          </button>
+        </NuxtLink>
+        <NuxtLink :to="next">
+          <button class="btn">
+            다음 글
+            <img src="@/assets/images/arrow_forward.svg" />
+          </button>
+        </NuxtLink>
+      </div>
+      <div v-if="admin.isAdmin" class="admin">
+        <NuxtLink :to="{ query: { id }, path: `/notice/edit` }">
+          <button class="btn">수정하기</button>
+        </NuxtLink>
+        <button class="btn" @click="_delete()">삭제하기</button>
       </div>
     </div>
   </div>
@@ -59,11 +69,16 @@ const router = useRouter();
 const admin = useAdminStore();
 
 const id = computed(() => route.params.id as string);
+const prev = computed(() => `/project/${Math.max(1, Number(id.value) - 1)}`);
+const next = computed(() => `/project/${Number(id.value) + 1}`);
 
 const content = ref<ProjectDetail>();
 
 watchEffect(async () => {
   content.value = await getProjectDetail(id.value);
+  if (!content.value) {
+    router.push("/project");
+  }
 });
 
 const _delete = async () => {

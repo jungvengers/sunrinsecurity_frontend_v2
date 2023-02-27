@@ -21,6 +21,12 @@
       </template>
     </div>
     <div class="submit_panel">
+      <NuxtLink :to="'/apply'">
+        <button>
+          취소
+          <img src="@/assets/images/close.svg" />
+        </button>
+      </NuxtLink>
       <button @click="submit()">
         수정
         <img src="@/assets/images/check.svg" />
