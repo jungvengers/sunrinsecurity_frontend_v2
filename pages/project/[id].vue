@@ -3,23 +3,24 @@
   <div class="notice_detail">
     <div class="title_panel">
       <div>
-        <h1 class="title">{{ content.name }}</h1>
+        <h1 class="title">{{ content?.name }}</h1>
         <h2 class="sub_title" @click="router.push('/project')">
           &lt; 프로젝트 전시장 페이지로
         </h2>
       </div>
       <div class="info">
         <span>
-          <p><span>동아리</span> {{ content.club }}</p>
-          <p><span>참가자</span> {{ content.participants }}</p>
+          <p><span>동아리</span> {{ content?.club }}</p>
+          <p><span>참가자</span> {{ content?.participants }}</p>
         </span>
         <span>
-          <p><span>분야</span> {{ content.type }}</p>
-          <p><span>소개</span> {{ content.description }}</p>
+          <p><span>분야</span> {{ content?.type }}</p>
+          <p><span>소개</span> {{ content?.description }}</p>
         </span>
       </div>
     </div>
-    <div class="notice_detail_panel">
+    <div v-if="!content" class="loading_wrapper"><Loading /></div>
+    <div v-else class="notice_detail_panel">
       <p class="content" v-html="content.detail"></p>
       <div class="attachments">
         <p>첨부파일 {{ content.attach.length }}</p>
@@ -49,6 +50,7 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { deleteProject } from "~~/api/project";
+import { ProjectDetail } from "~~/interfaces/project.interface";
 import { useAdminStore } from "~~/store/admin";
 
 const route = useRoute();
@@ -58,7 +60,11 @@ const admin = useAdminStore();
 
 const id = computed(() => route.params.id as string);
 
-const content = await getProjectDetail(route.params.id as string);
+const content = ref<ProjectDetail>();
+
+watchEffect(async () => {
+  content.value = await getProjectDetail(id.value);
+});
 
 const _delete = async () => {
   const res = await deleteProject(Number(id.value));
@@ -107,5 +113,12 @@ span {
       }
     }
   }
+}
+
+.loading_wrapper {
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

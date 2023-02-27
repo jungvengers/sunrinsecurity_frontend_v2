@@ -38,6 +38,8 @@ import { Question, Questions, UpdateForm } from "~~/interfaces/apply.interface";
 const route = useRoute();
 const router = useRouter();
 
+const loading = ref(true);
+
 const clubList = await getClubList();
 const club = computed(() => {
   const name = route.query.club as string;
@@ -48,6 +50,8 @@ const club = computed(() => {
 });
 const clubId = club.value.id ?? 1;
 const questionList = await getQuestions(clubId);
+
+loading.value = false;
 
 const questions: Question = {
   question1: "",

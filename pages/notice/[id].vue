@@ -3,21 +3,24 @@
   <div class="notice_detail">
     <div class="title_panel">
       <div class="title_panel_left">
-        <h1 class="title">{{ content.title }}</h1>
+        <h1 class="title">{{ notice?.title }}</h1>
         <h2 class="sub_title" @click="router.push('/notice')">
           &lt; 학과소식 페이지로
         </h2>
       </div>
       <div class="info">
-        <p><span>작성자</span> {{ content.author }}</p>
+        <p><span>작성자</span> {{ notice?.author }}</p>
         <p>
           <span>작성일</span>
-          {{ new Date(content.createdAt).toLocaleDateString("ko-kr") }}
+          {{
+            notice ? new Date(notice.createdAt).toLocaleDateString("ko-kr") : ""
+          }}
         </p>
       </div>
     </div>
-    <div class="notice_detail_panel">
-      <p class="content" v-html="content.content" />
+    <div v-if="!notice" class="loading_wrapper"><Loading /></div>
+    <div v-else class="notice_detail_panel">
+      <p class="content" v-html="notice.content" />
     </div>
     <div class="notice_function">
       <button
@@ -37,6 +40,7 @@
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { deleteNotice } from "~~/api/notice";
+import { NoticeDetail } from "~~/interfaces/notice.interface";
 import { useAdminStore } from "~~/store/admin";
 
 const router = useRouter();
@@ -46,7 +50,11 @@ const admin = useAdminStore();
 
 const id = computed(() => route.params.id as string);
 
-const content = await getNoticeDetail(id.value);
+const notice = ref<NoticeDetail>();
+
+watchEffect(async () => {
+  notice.value = await getNoticeDetail(id.value);
+});
 
 const _delete = async () => {
   const res = await deleteNotice(Number(id.value));
@@ -60,4 +68,11 @@ const _delete = async () => {
 
 <style lang="scss" scoped>
 @import "~~/assets/styles/pages/notice/detail/styles.scss";
+
+.loading_wrapper {
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
