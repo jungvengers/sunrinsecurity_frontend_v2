@@ -100,13 +100,13 @@ const sendProject = async () => {
     attach: [],
     image: "",
   };
-  if (file.value) {
+  if (file.value.files[0]) {
     const fileData = new FormData();
     fileData.append("file", file.value.files[0]);
     const fileUrl = await uploadFile(fileData);
     data.attach.push(fileUrl);
   }
-  if (image.value) {
+  if (image.value.files[0]) {
     const imageData = new FormData();
     imageData.append("file", image.value.files[0]);
     const imageUrl = await uploadFile(imageData);
