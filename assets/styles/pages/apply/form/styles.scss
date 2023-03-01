@@ -1,5 +1,6 @@
 .form {
-  height: 800px;
+  // why height: 800px;?
+  max-height: 80vh;
 
   .form_panel {
     .line {
@@ -41,7 +42,7 @@
 
   .submit_panel {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 40px;
     padding: 24px 32px;
     border-top: 1px solid $grayscale_40;

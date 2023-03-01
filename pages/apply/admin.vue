@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="form_panel">
-      <template v-for="(i, n) in questionList" :key="n">
+      <template v-for="(i, n) in 10" :key="n">
         <div class="line">
           <div class="input_panel">
             <p>{{ `질문 ${n + 1}` }}</p>
@@ -21,6 +21,12 @@
       </template>
     </div>
     <div class="submit_panel">
+      <NuxtLink :to="'/apply'">
+        <button>
+          취소
+          <img src="@/assets/images/close.svg" />
+        </button>
+      </NuxtLink>
       <button @click="submit()">
         수정
         <img src="@/assets/images/check.svg" />
@@ -31,20 +37,15 @@
 
 <script lang="ts" setup>
 import { getClubList } from "~~/composables/club";
-import { getQuestionList, getAnswer } from "~~/composables/apply";
-import { createAnswer, editAnswer, deleteAnswer, editForm } from "~~/api/apply";
-import {
-  Form,
-  FormAnswer,
-  Question,
-  Questions,
-  UpdateForm,
-} from "~~/interfaces/apply.interface";
+import { getQuestionList } from "~~/composables/apply";
+import { editForm } from "~~/api/apply";
+import { Question, Questions, UpdateForm } from "~~/interfaces/apply.interface";
 
 const route = useRoute();
 const router = useRouter();
 
-const info = await getUserInfo();
+const loading = ref(true);
+
 const clubList = await getClubList();
 const club = computed(() => {
   const name = route.query.club as string;
@@ -55,6 +56,8 @@ const club = computed(() => {
 });
 const clubId = club.value.id ?? 1;
 const questionList = await getQuestions(clubId);
+
+loading.value = false;
 
 const questions: Question = {
   question1: "",

@@ -9,14 +9,14 @@
 
     .title_panel_left {
       width: 70%;
-      
-      .title {
-        @include ellipsis;
-      }
-  
-      .sub_title {
-        cursor: pointer;
-      }
+    }
+
+    .title {
+      @include ellipsis;
+    }
+    
+    .sub_title {
+      cursor: pointer;
     }
 
     .info {
@@ -47,14 +47,37 @@
   }
 }
 
-button {
-  margin: 12px;
-  padding: 12px 18px;
-  color: $grayscale_70;
-  background-color: $grayscale_40;
-  border-radius: 8px;
-  margin-right: 8px;
-  font-size: 18px;
-  float: right;
-  cursor: pointer;
+.notice_function {
+  display: flex;
+  margin-top: 40px;
+  padding: 24px 32px;
+  border-top: 1px solid $grayscale_40;
+  gap: 36px;
+  flex-wrap: wrap;
+
+  .paging {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .admin {
+    display: flex;
+    gap: 16px;
+    width: auto;
+  }
+
+  button {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: $grayscale_40;
+    color: $grayscale_50;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 150%;
+    cursor: pointer;
+  }
 }

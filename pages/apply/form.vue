@@ -2,11 +2,12 @@
   <div class="form">
     <div class="title_panel">
       <div>
-        <h1 class="title">{{ club.name }} 지원</h1>
+        <h1 class="title">{{ club?.name ?? "동아리" }} 지원</h1>
         <h2 class="sub_title">동아리에 지원할 수 있습니다.</h2>
       </div>
     </div>
-    <div class="form_panel">
+    <Loading v-if="!(clubList && info)" />
+    <div v-else class="form_panel">
       <div class="line">
         <div class="input_panel">
           <p>학번</p>
@@ -61,6 +62,12 @@
       </template>
     </div>
     <div class="submit_panel">
+      <NuxtLink :to="'/apply'">
+        <button>
+          취소
+          <img src="@/assets/images/close.svg" />
+        </button>
+      </NuxtLink>
       <button v-if="route.query.edit" @click="_delete()">삭제</button>
       <button @click="submit()">
         제출
@@ -75,27 +82,31 @@ import { getClubList } from "~~/composables/club";
 import { getQuestionList, getAnswer } from "~~/composables/apply";
 import { createAnswer, editAnswer, deleteAnswer } from "~~/api/apply";
 import { Answers, FormAnswer, Questions } from "~~/interfaces/apply.interface";
+import { ClubList } from "~~/interfaces/club.interface";
 
 const route = useRoute();
 const router = useRouter();
 
-const info = await getUserInfo();
-const clubList = await getClubList();
+const info = ref();
+const clubList = ref<ClubList>();
 const club = computed(() => {
   const name = route.query.club as string;
-  return clubList.find((x) => x.name == name) || clubList[0];
+  if (!clubList.value) return undefined;
+  return clubList.value.find((x) => x.name == name) || clubList.value[0];
 });
-const clubId = club.value.id ?? 1;
-const questionList = await getQuestions(clubId);
-const answer = await getAnswer(clubId);
+const clubId = computed(() => club.value?.id ?? 1);
+const questionList = ref<string[]>([]);
 
-const phone = ref(answer.phone ?? "");
-const id = computed(
-  () =>
-    info.grade + ("0" + info.class).slice(-2) + ("0" + info.number).slice(-2),
+const phone = ref("");
+const id = computed(() =>
+  info.value
+    ? info.value.grade +
+      ("0" + info.value.class).slice(-2) +
+      ("0" + info.value.number).slice(-2)
+    : "",
 );
 
-const answers: { [key: string]: string } = {
+const answers = ref<{ [key: string]: string }>({
   answer1: "",
   answer2: "",
   answer3: "",
@@ -106,29 +117,51 @@ const answers: { [key: string]: string } = {
   answer8: "",
   answer9: "",
   answer10: "",
-};
+});
 
-if (answer) {
-  for (let i = 0; i < 10; i++) {
-    answers[Answers[i]] = answer[Answers[i]];
-  }
-}
+watchEffect(() => {
+  getUserInfo()
+    .then((res) => {
+      info.value = res;
+    })
+    .catch(() => router.push("/login"));
+  getClubList().then(async (res) => {
+    clubList.value = res;
+    (async () => {
+      questionList.value = await getQuestions(clubId.value);
+    })();
+    (async () => {
+      const answer = await getAnswer(clubId.value);
+      phone.value = answer.phone ?? "";
+      if (answer) {
+        for (let i = 0; i < 10; i++) {
+          answers.value[Answers[i]] = answer[Answers[i]];
+        }
+      }
+    })();
+  });
+});
 
 const submit = async () => {
-  const answer: FormAnswer = {
-    clubid: clubList.filter((i) => i.name === club.value.name)[0].id,
-    ...answers,
+  if (!club.value) {
+    return void alert(
+      "동아리가 로드되지 않았습니다. 잠시 후 다시 시도해주세요.",
+    );
+  }
+  const form: FormAnswer = {
+    clubid: club.value.id,
+    ...answers.value,
     phone: phone.value,
   };
   const res = route.query.edit
-    ? await editAnswer(clubId, answer)
-    : await createAnswer(answer);
+    ? await editAnswer(clubId.value, form)
+    : await createAnswer(form);
   if (res.statusCode === 400) alert(res.message);
   router.push("/apply");
 };
 
 const _delete = async () => {
-  const res = await deleteAnswer(clubId);
+  const res = await deleteAnswer(clubId.value);
   if (res.statusCode === 400) alert(res.message);
   router.push("/apply");
 };

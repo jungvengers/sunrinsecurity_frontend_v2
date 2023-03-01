@@ -6,7 +6,8 @@
         <h2 class="sub_title">동아리에 지원할 수 있습니다.</h2>
       </div>
     </div>
-    <div class="apply_panel">
+    <div v-if="!clubList" class="loading_wrapper"><Loading /></div>
+    <div v-else class="apply_panel">
       <template v-for="(club, n) in clubList" :key="n">
         <div
           class="apply_club_panel"
@@ -46,6 +47,8 @@
 
 <script lang="ts" setup>
 import { getApplyList } from "~~/composables/apply";
+import { ApplyList } from "~~/interfaces/apply.interface";
+import { ClubList } from "~~/interfaces/club.interface";
 import { useAdminStore } from "~~/store/admin";
 
 const route = useRoute();
@@ -53,11 +56,16 @@ const router = useRouter();
 
 const admin = useAdminStore();
 
-const applyList = await getApplyList();
-const clubList = await getClubList();
+const applyList = ref<ApplyList[]>();
+const clubList = ref<ClubList>();
+
+watchEffect(async () => {
+  applyList.value = await getApplyList();
+  clubList.value = await getClubList();
+});
 
 const isApply = (club: string) => {
-  return applyList.filter((i) => i.club.name === club).length > 0;
+  return (applyList.value?.filter((i) => i.club.name === club).length ?? 0) > 0;
 };
 
 const apply = (club: string) => {
@@ -72,4 +80,11 @@ definePageMeta({
 
 <style lang="scss" scoped>
 @import "~~/assets/styles/pages/apply/index/styles.scss";
+
+.loading_wrapper {
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

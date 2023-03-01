@@ -1,6 +1,8 @@
 @import "_variables.scss";
 
 .project {
+  display: flex;
+  flex-direction: column;
   height: 640px;
 
   .project_panel {
@@ -14,6 +16,7 @@
       flex: 0 0 49.5%;
       height: 180px;
       background-color: $project_page_item_background_color;
+      border-radius: 8px;
 
       .img_panel {
         padding: 16px;
