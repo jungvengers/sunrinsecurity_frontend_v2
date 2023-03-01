@@ -1,16 +1,29 @@
 <template>
   <header>
+    <input id="toggle" type="checkbox" />
     <div>
       <NuxtLink :to="'/'" class="header_logo_link"
         ><img class="header_logo" src="@/assets/images/logo.svg"
       /></NuxtLink>
-      <NuxtLink
-        v-for="(i, n) in headerMenuList"
-        :key="n"
-        class="header_menu"
-        :to="i.path"
-        >{{ i.name }}</NuxtLink
-      >
+      <div class="sidebar">
+        <NuxtLink :to="'/'" class="header_menu sidebar_logo_link"
+          ><img
+            class="header_logo"
+            src="@/assets/images/logo.svg"
+          />정보보호과</NuxtLink
+        >
+        <NuxtLink
+          v-for="(i, n) in headerMenuList"
+          :key="n"
+          class="header_menu"
+          :to="i.path"
+          >{{ i.name }}</NuxtLink
+        >
+      </div>
+      <label class="sidebar_background" for="toggle"></label>
+      <label class="header_toggle" for="toggle">
+        <img src="@/assets/images/menu.svg" alt="햄버거" />
+      </label>
       <NuxtLink
         v-if="!authStore.accessToken"
         to="/login"
