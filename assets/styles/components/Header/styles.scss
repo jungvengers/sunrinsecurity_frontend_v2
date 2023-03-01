@@ -12,11 +12,87 @@ header {
   user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+
+  input[type="checkbox"] {
+    display: none;
+
+    &:checked + div .sidebar {
+      transform: translateX(0);
+    }
+
+    &:checked + div .sidebar_background {
+      transform: translateX(0);
+    }
+
+    &:checked + div .header_toggle {
+      transform: translateX(-114px);
+    }
+  }
   
   div {
     display: flex;
     margin: 0 auto;
     width: 1280px;
+
+    .header_toggle {
+      display: none;
+
+      @include tablet {
+        display: block;
+        padding: 16px 0 16px 22px;
+        margin-left: auto;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+        z-index: 3;
+
+        img {
+          height: 31px;
+        }
+      }
+    }
+
+    .sidebar {
+      .sidebar_logo_link {
+        display: none;
+
+        @include tablet {
+          margin-bottom: 20px;
+          display: flex;
+          gap: 12px;
+          font-size: 20px;
+        }
+      }
+
+      @include tablet {
+        width: 200px !important;
+        padding: 60px 20px !important;
+
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        transform: translateX(100%);
+        background-color: $grayscale_10;
+        transition: transform 0.3s ease-in-out;
+        z-index: 1;
+      }
+    }
+
+    .sidebar_background {
+      display: none;
+
+      @include tablet {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        transform: translateX(100%);
+      }
+    }
 
     .header_menu {
       color: $header_text_color;
@@ -27,8 +103,12 @@ header {
       align-items: center;
       opacity: 0.75;
 
+      img {
+        height: 45px;
+      }
+
       @include tablet {
-        display: none;
+        color: $grayscale_70;
       }
     }
     
@@ -44,6 +124,10 @@ header {
     .header_login {
       margin-left: auto;
       cursor: pointer;
+      
+      @include tablet {
+        display: none;
+      }
     }
     
     .router-link-active {
