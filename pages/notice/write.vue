@@ -21,7 +21,7 @@
            bullist numlist outdent indent | removeformat | image | help',
         content_style: 'div {background-color: #000000;}',
         automatic_uploads: true,
-        images_upload_url: `${config.public.BaseUrl}/upload`,
+        images_upload_url: `${config.public.CDNUrl}/upload`,
         file_picker_types: 'image',
       }"
     />

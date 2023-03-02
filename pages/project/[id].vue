@@ -8,6 +8,7 @@
           &lt; 프로젝트 전시장 페이지로
         </h2>
       </div>
+      <!-- 해당 부분 모바일에서 팝업으로 변경 -->
       <div class="info">
         <span>
           <p><span>동아리</span> {{ content?.club }}</p>

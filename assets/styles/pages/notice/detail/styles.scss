@@ -5,16 +5,19 @@
   .title_panel {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
     .title_panel_left {
       width: 70%;
+
+      @include tablet {
+        width: 60%;
+      }
     }
 
     .title {
       @include ellipsis;
     }
-    
+
     .sub_title {
       cursor: pointer;
     }
@@ -32,6 +35,10 @@
         span {
           color: $notice_detail_page_info_constant_color;
         }
+      }
+
+      @include tablet {
+        display: none;
       }
     }
   }

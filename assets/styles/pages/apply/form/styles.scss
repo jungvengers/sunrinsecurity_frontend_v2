@@ -1,11 +1,10 @@
 .form {
-  // why height: 800px;?
-  max-height: 80vh;
+  // why height: 800px;?    
 
   .form_panel {
     .line {
       display: flex;
-      padding: 24px 32px 0;
+      padding: 24px 24px 0;
       gap: 24px;
 
       .input_panel {
@@ -26,6 +25,7 @@
           background-color: $grayscale_40;
           color: $grayscale_70;
           resize: vertical;
+          width: 100%;
         }
 
         textarea {
@@ -35,6 +35,12 @@
           background-color: $grayscale_40;
           color: $grayscale_70;
           resize: vertical;
+        }
+      }
+
+      &:nth-child(2) {
+        @include tablet {
+          flex-direction: column;
         }
       }
     }

@@ -27,7 +27,7 @@
            alignleft aligncenter alignright alignjustify | \
            bullist numlist outdent indent | removeformat | image | help',
         automatic_uploads: true,
-        images_upload_url: `${config.public.BaseUrl}/upload`,
+        images_upload_url: `${config.public.CDNUrl}/upload`,
         file_picker_types: 'image',
       }"
     />

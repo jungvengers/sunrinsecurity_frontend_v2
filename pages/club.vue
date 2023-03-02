@@ -10,7 +10,10 @@
     </div>
     <div v-if="!club" class="loading_wrapper"><Loading /></div>
     <div v-else class="club_panel">
-      <img :src="club.image" class="club_image" />
+      <div class="club_title_wrapper">
+        <h1 class="name_mobile">{{ club.name }}</h1>
+        <img :src="club.image" class="club_image" />
+      </div>
       <div class="club_description">
         <h1 class="name">{{ club.name }}</h1>
         <div class="description">

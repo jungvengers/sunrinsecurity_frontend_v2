@@ -29,6 +29,10 @@
           font-size: 28px;
           font-weight: $font_semi_bold;
           color: $title_color;
+
+          @include tablet {
+            font-size: 24px;
+          }
         }
       
         .sub_title {
@@ -36,6 +40,11 @@
           font-size: 16px;
           font-weight: $font_medium;
           color: $sub_title_color;
+
+          @include tablet {
+            font-size: 16px;
+            width: 100%;
+          }
         }
       }
 
@@ -49,16 +58,14 @@
         cursor: pointer;
 
         @include tablet {
-          display: none;
+          // display: none;
         }
       }
 
       @include tablet {
-        padding: 28px 24px;
-      }
-
-      @include mobile {
-        display: none;
+        padding: 28px 32px;
+        gap: 10px;
+        flex-direction: column;
       }
     }
 

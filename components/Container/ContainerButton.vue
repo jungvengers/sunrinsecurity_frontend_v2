@@ -16,5 +16,9 @@ const props = defineProps({});
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 </style>

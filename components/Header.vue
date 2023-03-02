@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <input id="toggle" type="checkbox" />
+  <header :style="route.path === '/' ? {} : { background: '#131313' }">
+    <input id="toggle" v-model="sidebar" type="checkbox" />
     <div>
       <NuxtLink :to="'/'" class="header_logo_link"
         ><img class="header_logo" src="@/assets/images/logo.svg"
@@ -42,6 +42,17 @@ import headerMenuList from "~~/constants/headerMenuList";
 import { useAuthStore } from "~~/store/auth";
 import { useAdminStore } from "~~/store/admin";
 import { logout } from "~~/api/auth";
+
+const route = useRoute();
+
+const sidebar = ref(false);
+watch(
+  () => route.name,
+  () => {
+    sidebar.value = true;
+    sidebar.value = false;
+  },
+);
 
 const authStore = useAuthStore();
 const adminStore = useAdminStore();
