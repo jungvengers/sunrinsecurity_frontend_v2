@@ -71,4 +71,10 @@ definePageMeta({
 
 <style lang="scss" scoped>
 @import "~~/assets/styles/pages/project/index/styles.scss";
+
+@include mobile {
+  .title_panel {
+    display: none;
+  }
+}
 </style>
