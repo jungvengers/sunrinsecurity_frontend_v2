@@ -74,7 +74,7 @@ watchEffect(async () => {
 const _delete = async () => {
   const res = await deleteNotice(Number(id.value));
   if (res.status === 200) {
-    router.push(`/project`);
+    router.push(`/notice`);
   } else {
     alert("삭제에 실패했습니다.");
   }
