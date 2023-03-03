@@ -77,7 +77,7 @@ definePageMeta({
 
 @include mobile {
   .title_panel {
-    display: none;
+    display: none !important;
   }
 }
 </style>

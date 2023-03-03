@@ -11,9 +11,12 @@
     padding-bottom: 118px;
     flex-wrap: wrap;
 
-    @include tablet {
-      padding-bottom: 82px;
+    @include mobile {
+      padding-top: 16px;
+      padding-bottom: 64px;
     }
+
+    
 
     .project_item {
       display: flex;
@@ -53,6 +56,8 @@
           font-size: 20px;
           font-weight: $font_medium;
           color: $project_page_item_title_color;
+
+          @include ellipsis;
         }
 
         div {
