@@ -28,7 +28,7 @@ export async function deleteProject(id: number): Promise<any> {
 }
 
 export async function uploadFile(params: FormData): Promise<{ url: string }> {
-  const { data } = await getAPI("/upload", {
+  const { data } = await getAPI("https://cdn.sunrin-security.com/upload", {
     method: "POST",
     data: params,
   }).catch((err) => err.response.data);
