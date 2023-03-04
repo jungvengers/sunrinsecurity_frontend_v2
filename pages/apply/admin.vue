@@ -40,6 +40,7 @@ import { getClubList } from "~~/composables/club";
 import { getQuestionList } from "~~/composables/apply";
 import { editForm } from "~~/api/apply";
 import { Question, Questions, UpdateForm } from "~~/interfaces/apply.interface";
+import { AxiosError } from "axios";
 
 const route = useRoute();
 const router = useRouter();
@@ -88,11 +89,10 @@ const submit = async () => {
 
 async function getQuestions(id: number) {
   const questions = await getQuestionList(id);
-  return Questions.map((x) => questions[x]).filter((x) => x);
-  // return Object.entries(await getQuestionList(id))
-  //   .filter((x) => Questions.includes(x[0]))
-  //   .filter((x) => x[1])
-  //   .map((x) => x[1]);
+  if (!(questions instanceof AxiosError)) {
+    return Questions.map((x) => questions[x]).filter((x) => x);
+  }
+  return [];
 }
 
 definePageMeta({

@@ -40,6 +40,7 @@
 import { getClubList } from "~~/composables/club";
 import { getQuestionList } from "~~/composables/apply";
 import { Questions } from "~~/interfaces/apply.interface";
+import { AxiosError } from "axios";
 
 const route = useRoute();
 const router = useRouter();
@@ -62,11 +63,14 @@ watch(
 // questions to array
 async function getQuestions(id: number) {
   const questions = await getQuestionList(id);
-  return Questions.map((x) => questions[x]).filter((x) => x);
-  // return Object.entries(await getQuestionList(id))
-  //   .filter((x) => Questions.includes(x[0]))
-  //   .filter((x) => x[1])
-  //   .map((x) => x[1]);
+  if (questions instanceof AxiosError) {
+    if (questions.response?.status == 403) {
+      alert("동아리 지원 기간이 아닙니다.");
+      router.push("/");
+    }
+  } else {
+    return Questions.map((x) => questions[x]).filter((x) => x);
+  }
 }
 </script>
 
