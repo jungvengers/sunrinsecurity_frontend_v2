@@ -52,7 +52,7 @@ export interface FormAnswer {
   [key: string]: string | number;
 }
 
-export interface ApplyList {
+export interface Apply {
   [key: string]: string | object;
   club: {
     name: string;

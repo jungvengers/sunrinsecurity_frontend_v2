@@ -1,22 +1,23 @@
 import { getAPI } from "./getAPI";
-import { ApplyList, Answer, Form } from "~~/interfaces/apply.interface";
+import { Apply, Answer, Form } from "~~/interfaces/apply.interface";
+import { AxiosError } from "axios";
 
-export const getQuestionList = async (id: number): Promise<Form> => {
-  try {
-    const { data } = await getAPI.get(`/form/${id}`);
-    return data;
-  } catch (e: any) {
-    return e;
-  }
+export const getQuestionList = async (
+  id: number,
+): Promise<Form | AxiosError> => {
+  const res = await getAPI
+    .get(`/form/${id}`)
+    .then((res) => res.data)
+    .catch((e) => e);
+  return res;
 };
 
-export const getApplyList = async (): Promise<ApplyList[]> => {
-  try {
-    const { data } = await getAPI.get(`/application`);
-    return data;
-  } catch (e: any) {
-    return e;
-  }
+export const getApplyList = async (): Promise<Apply[] | AxiosError> => {
+  const res = await getAPI
+    .get(`/application`)
+    .then((res) => res.data)
+    .catch((e) => e);
+  return res;
 };
 
 export const getAnswer = async (id: number): Promise<Answer> => {
