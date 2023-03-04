@@ -40,7 +40,7 @@
       </div>
       <div class="preview">
         <button
-          v-if="admin.isAdmin"
+          v-if="admin.isClub"
           @click="
             router.push({ query: { club: admin.role }, path: '/apply/admin' })
           "
