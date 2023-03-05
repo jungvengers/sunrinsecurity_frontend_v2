@@ -53,10 +53,24 @@ export interface FormAnswer {
 }
 
 export interface Apply {
-  [key: string]: string | object;
+  answer1: string;
+  answer2: string;
+  answer3: string;
+  answer4: string;
+  answer5: string;
+  answer6: string;
+  answer7: string;
+  answer8: string;
+  answer9: string;
+  answer10: string;
+  phone: string;
+  name: string;
+  studentId: string;
+  email: string;
   club: {
     name: string;
   };
+  [key: string]: string | object;
 }
 
 export type Answer = {

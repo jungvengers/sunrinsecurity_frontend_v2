@@ -6,6 +6,7 @@
       type="text"
       :value="props.value"
       :placeholder="props.placeholder"
+      :readonly="props.readonly"
     />
   </div>
 </template>
@@ -23,6 +24,10 @@ const props = defineProps({
   label: {
     type: String,
     default: "Input",
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>

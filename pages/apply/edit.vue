@@ -96,7 +96,7 @@ async function getQuestions(id: number) {
 }
 
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ["auth", "admin"],
 });
 </script>
 
