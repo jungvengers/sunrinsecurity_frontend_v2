@@ -37,7 +37,7 @@
         />
       </ContainerBody>
       <ContainerFooter>
-        <ContainerButton title="닫기" @click="showModal = false" />
+        <ContainerButton :icon="closeImage" @click="showModal = false" />
       </ContainerFooter>
     </ContainerWrapper>
   </ContainerModal>
@@ -47,6 +47,7 @@
 import { AxiosError } from "axios";
 import { Answers, Questions } from "~~/interfaces/apply.interface";
 import { Apply } from "~~/interfaces/apply.interface";
+import closeImage from "~/assets/images/close.svg";
 
 const route = useRoute();
 const router = useRouter();
