@@ -28,7 +28,7 @@
           <ContainerInput label="전화번호" :value="apply.phone" readonly />
           <ContainerInput label="학교 이메일" :value="apply.email" readonly />
         </ContainerRow>
-        <ContainerInput
+        <ContainerTextArea
           v-for="(question, n) in questionList"
           :key="n"
           :label="question"
