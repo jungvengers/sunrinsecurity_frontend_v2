@@ -1,11 +1,39 @@
 <template>
-  <button class="btn">
+  <button class="btn" :style="{ 'background-color': color }" @click="onClick">
+    {{ title }}
+    <img v-if="icon" :src="icon" />
     <slot />
   </button>
 </template>
 
 <script setup>
-const props = defineProps({});
+const props = defineProps({
+  title: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  color: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  icon: {
+    type: String,
+    required: false,
+    default: null,
+  },
+});
+
+const emit = defineEmits(["click"]);
+
+const onClick = () => {
+  emit("click");
+};
+
+defineExpose({
+  onClick,
+});
 </script>
 
 <style lang="scss" scoped>

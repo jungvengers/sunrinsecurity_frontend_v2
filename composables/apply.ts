@@ -20,6 +20,16 @@ export const getApplyList = async (): Promise<Apply[] | AxiosError> => {
   return res;
 };
 
+export const getApplyOfClubList = async (
+  id: number,
+): Promise<Apply[] | AxiosError> => {
+  const res = await getAPI
+    .get(`/application/${id}/admin`)
+    .then((res) => res.data)
+    .catch((e) => e);
+  return res;
+};
+
 export const getAnswer = async (id: number): Promise<Answer> => {
   try {
     const { data } = await getAPI.get(`/application/${id}`);

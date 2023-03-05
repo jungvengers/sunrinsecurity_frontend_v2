@@ -42,10 +42,18 @@
         <button
           v-if="admin.isClub"
           @click="
-            router.push({ query: { club: admin.role }, path: '/apply/admin' })
+            router.push({ query: { club: admin.role }, path: '/apply/edit' })
           "
         >
           동아리 질문 수정하기
+        </button>
+        <button
+          v-if="admin.isClub"
+          @click="
+            router.push({ query: { club: admin.role }, path: '/apply/admin' })
+          "
+        >
+          동아리 지원서 목록
         </button>
         <button v-else @click="router.push('/apply/preview')">
           동아리별 질문 미리보기
