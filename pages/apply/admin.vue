@@ -1,46 +1,48 @@
 <template>
-  <ContainerWrapper>
-    <ContainerHeader
+  <Container.Wrapper>
+    <Container.Header
       :title="`${club.name} 지원서`"
       sub-title="동아리 지원서 목록"
     />
-    <ContainerBody>
-      <ContainerTable
+    <Container.Body>
+      <Container.Table
         :columns="['이름', '학번']"
         :sizes="[{ flex: 1 }, { width: '52px' }]"
         :data="tableData"
         @click-item="detail"
-      ></ContainerTable>
-    </ContainerBody>
-    <ContainerFooter>
-      <ContainerButton title="돌아가기" @click="router.push(`/apply`)" />
-    </ContainerFooter>
-  </ContainerWrapper>
-  <ContainerModal v-if="showModal && apply">
-    <ContainerWrapper :style="{ width: '80vw' }">
-      <ContainerHeader title="지원서 상세" sub-title="지원서 상세 내용" />
-      <ContainerBody :style="{ 'flex-wrap': 'nowrap', 'overflow-y': 'scroll' }">
-        <ContainerRow>
-          <ContainerInput label="학번" :value="apply.studentId" readonly />
-          <ContainerInput label="이름" :value="apply.name" readonly />
-        </ContainerRow>
-        <ContainerRow>
-          <ContainerInput label="전화번호" :value="apply.phone" readonly />
-          <ContainerInput label="학교 이메일" :value="apply.email" readonly />
-        </ContainerRow>
-        <ContainerTextArea
+      ></Container.Table>
+    </Container.Body>
+    <Container.Footer>
+      <Container.Button title="돌아가기" @click="router.push(`/apply`)" />
+    </Container.Footer>
+  </Container.Wrapper>
+  <Container.Modal v-if="showModal && apply">
+    <Container.Wrapper :style="{ width: '80vw' }">
+      <Container.Header title="지원서 상세" sub-title="지원서 상세 내용" />
+      <Container.Body
+        :style="{ 'flex-wrap': 'nowrap', 'overflow-y': 'scroll' }"
+      >
+        <Container.Row>
+          <Container.Input label="학번" :value="apply.studentId" readonly />
+          <Container.Input label="이름" :value="apply.name" readonly />
+        </Container.Row>
+        <Container.Row>
+          <Container.Input label="전화번호" :value="apply.phone" readonly />
+          <Container.Input label="학교 이메일" :value="apply.email" readonly />
+        </Container.Row>
+        <Container.TextArea
           v-for="(question, n) in questionList"
           :key="n"
           :label="question"
           :value="apply[Answers[n]]"
           readonly
         />
-      </ContainerBody>
-      <ContainerFooter>
-        <ContainerButton :icon="closeImage" @click="showModal = false" />
-      </ContainerFooter>
-    </ContainerWrapper>
-  </ContainerModal>
+      </Container.Body>
+      <Container.Footer>
+        <Container.Button :icon="closeImage" @click="showModal = false" />
+      </Container.Footer>
+    </Container.Wrapper>
+  </Container.Modal>
 </template>
 
 <script lang="ts" setup>
@@ -48,6 +50,7 @@ import { AxiosError } from "axios";
 import { Answers, Questions } from "~~/interfaces/apply.interface";
 import { Apply } from "~~/interfaces/apply.interface";
 import closeImage from "~/assets/images/close.svg";
+import Container from "~~/components/Container";
 
 const route = useRoute();
 const router = useRouter();
