@@ -12,11 +12,12 @@
         @click-item="detail"
       ></Container.Table>
     </Container.Body>
-    <Container.Footer>
+    <Container.Footer :style="{ gap: '24px' }">
       <Container.Button title="돌아가기" @click="router.push(`/apply`)" />
+      <Container.Button title="내보내기(Excel)" @click="exportExcel()" />
     </Container.Footer>
   </Container.Wrapper>
-  <Container.Modal v-if="showModal && apply">
+  <Container.Modal v-if="detailModal && apply">
     <Container.Wrapper :style="{ width: '80vw' }">
       <Container.Header title="지원서 상세" sub-title="지원서 상세 내용" />
       <Container.Body
@@ -39,7 +40,7 @@
         />
       </Container.Body>
       <Container.Footer>
-        <Container.Button :icon="closeImage" @click="showModal = false" />
+        <Container.Button :icon="closeImage" @click="detailModal = false" />
       </Container.Footer>
     </Container.Wrapper>
   </Container.Modal>
@@ -51,12 +52,13 @@ import { Answers, Questions } from "~~/interfaces/apply.interface";
 import { Apply } from "~~/interfaces/apply.interface";
 import closeImage from "~/assets/images/close.svg";
 import Container from "~~/components/Container";
+import * as xlsx from "xlsx";
 
 const route = useRoute();
 const router = useRouter();
 
 const tableData = ref<Array<Array<string>>>([]);
-const showModal = ref<boolean>();
+const detailModal = ref<boolean>();
 
 const clubList = await getClubList();
 const club = computed(() => {
@@ -77,11 +79,31 @@ const apply = ref<Apply>();
 function detail(id: number) {
   apply.value = applyList[id];
   console.log(apply.value);
-  showModal.value = true;
+  detailModal.value = true;
   // router.push({
   //   query: { club: club.value.name },
   //   path: `/apply/detail/${id}`,
   // });
+}
+
+function exportExcel() {
+  const excel = xlsx.utils.book_new();
+  const sheet = xlsx.utils.json_to_sheet(
+    applyList
+      .map((x) => ({
+        이름: x.name,
+        학번: x.studentId,
+        전화번호: x.phone,
+        이메일: x.email,
+        ...Answers.reduce((acc, cur, i) => {
+          if (questionList[i]) acc[questionList[i]] = x[cur];
+          return acc;
+        }, {} as Record<string, string>),
+      }))
+      .map((x) => (console.log(x), x)),
+  );
+  xlsx.utils.book_append_sheet(excel, sheet, "지원자 목록");
+  xlsx.writeFile(excel, `${club.value.name} 지원자 목록.xlsx`);
 }
 
 async function getQuestions(id: number) {
