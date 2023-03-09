@@ -1,8 +1,8 @@
 <template>
   <Container.Wrapper>
     <Container.Header
-      :title="`${club.name} 지원서`"
-      sub-title="동아리 지원서 목록"
+      :title="`${club.name} 지원서 목록`"
+      :sub-title="`${applyList.length}개의 지원서`"
     />
     <Container.Body>
       <Container.Table
