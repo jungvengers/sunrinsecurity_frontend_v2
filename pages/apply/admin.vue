@@ -12,9 +12,10 @@
         @click-item="detail"
       ></Container.Table>
     </Container.Body>
-    <Container.Footer :style="{ gap: '24px' }">
+    <Container.Footer>
       <Container.Button title="돌아가기" @click="router.push(`/apply`)" />
       <Container.Button title="내보내기(Excel)" @click="exportExcel()" />
+      <Container.Button title="내보내기(Word)" @click="exportDocx()" />
     </Container.Footer>
   </Container.Wrapper>
   <Container.Modal v-if="detailModal && apply">
@@ -39,8 +40,12 @@
           readonly
         />
       </Container.Body>
-      <Container.Footer>
+      <Container.Footer :style="{ 'justify-content': 'space-between' }">
         <Container.Button :icon="closeImage" @click="detailModal = false" />
+        <Container.Button
+          title="내보내기(Word)"
+          @click="exportDocxSingle(apply!)"
+        />
       </Container.Footer>
     </Container.Wrapper>
   </Container.Modal>
@@ -53,6 +58,17 @@ import { Apply } from "~~/interfaces/apply.interface";
 import closeImage from "~/assets/images/close.svg";
 import Container from "~~/components/Container";
 import * as xlsx from "xlsx";
+import {
+  AlignmentType,
+  Document,
+  HeadingLevel,
+  INumberingOptions,
+  IParagraphStyleOptions,
+  LevelFormat,
+  Packer,
+  Paragraph,
+} from "docx";
+import { saveAs } from "file-saver";
 
 const route = useRoute();
 const router = useRouter();
@@ -86,6 +102,126 @@ function detail(id: number) {
   // });
 }
 
+const paragraphStyles: readonly IParagraphStyleOptions[] = [
+  {
+    id: "Heading1",
+    name: "Heading 1",
+    basedOn: "Normal",
+    next: "Normal",
+    quickFormat: true,
+    run: {
+      size: 28,
+      bold: true,
+    },
+    paragraph: {
+      spacing: {
+        after: 120,
+      },
+    },
+  },
+  {
+    id: "Heading2",
+    name: "Heading 2",
+    basedOn: "Normal",
+    next: "Normal",
+    quickFormat: true,
+    run: {
+      size: 24,
+      bold: true,
+    },
+    paragraph: {
+      spacing: {
+        after: 120,
+      },
+    },
+  },
+  {
+    id: "Heading3",
+    name: "Heading 3",
+    basedOn: "Normal",
+    next: "Normal",
+    quickFormat: true,
+    run: {
+      size: 20,
+      bold: true,
+    },
+    paragraph: {
+      spacing: {
+        after: 120,
+      },
+    },
+  },
+  {
+    id: "Heading4",
+    name: "Heading 4",
+    basedOn: "Normal",
+    next: "Normal",
+    quickFormat: true,
+    run: {
+      size: 16,
+      bold: true,
+    },
+    paragraph: {
+      spacing: {
+        after: 120,
+      },
+    },
+  },
+  {
+    id: "Heading5",
+    name: "Heading 5",
+    basedOn: "Normal",
+    next: "Normal",
+    quickFormat: true,
+    run: {
+      size: 14,
+      bold: true,
+    },
+    paragraph: {
+      spacing: {
+        after: 120,
+      },
+    },
+  },
+  {
+    id: "Heading6",
+    name: "Heading 6",
+    basedOn: "Normal",
+    next: "Normal",
+    quickFormat: true,
+    run: {
+      size: 12,
+      bold: true,
+    },
+    paragraph: {
+      spacing: {
+        after: 120,
+      },
+    },
+  },
+];
+
+const numbering: INumberingOptions = {
+  config: [
+    {
+      reference: "numbering",
+      levels: [
+        {
+          level: 0,
+          format: LevelFormat.DECIMAL,
+          text: "%1.",
+          alignment: AlignmentType.LEFT,
+          style: {
+            paragraph: {
+              indent: { left: 720, hanging: 360 },
+            },
+          },
+        },
+      ],
+    },
+  ],
+};
+
 function exportExcel() {
   const excel = xlsx.utils.book_new();
   const sheet = xlsx.utils.json_to_sheet(
@@ -104,6 +240,103 @@ function exportExcel() {
   );
   xlsx.utils.book_append_sheet(excel, sheet, "지원자 목록");
   xlsx.writeFile(excel, `${club.value.name} 지원자 목록.xlsx`);
+}
+
+function exportDocx() {
+  const doc = new Document({
+    title: `${club.value.name} 지원자 목록`,
+    styles: {
+      paragraphStyles,
+    },
+    numbering,
+    sections: [
+      {
+        properties: {},
+        children: [
+          new Paragraph({
+            text: `문서 정보`,
+            heading: HeadingLevel.HEADING_1,
+          }),
+          new Paragraph({
+            text: `동아리 명: ${club.value.name}`,
+          }),
+          new Paragraph({
+            text: `지원자 수: ${applyList.length}`,
+          }),
+          new Paragraph({
+            text: `질문`,
+            heading: HeadingLevel.HEADING_2,
+          }),
+          ...questionList.map(
+            (x) =>
+              new Paragraph({
+                text: x,
+                numbering: { level: 0, reference: "numbering" },
+              }),
+          ),
+        ],
+      },
+      ...applyList.map(createSection),
+    ],
+  });
+  Packer.toBlob(doc).then((blob) => {
+    saveAs(blob, `${club.value.name} 지원자 목록.docx`);
+  });
+}
+
+function exportDocxSingle(app: Apply) {
+  const doc = new Document({
+    title: `${app.name}님의 지원서`,
+    styles: {
+      paragraphStyles,
+    },
+    numbering,
+    sections: [createSection(app)],
+  });
+  Packer.toBlob(doc).then((blob) => {
+    saveAs(blob, `${app.name}님의 지원서.docx`);
+  });
+}
+
+function createSection(app: Apply) {
+  return {
+    properties: {},
+    children: [
+      new Paragraph({
+        text: `${app.name}`,
+        heading: HeadingLevel.HEADING_1,
+      }),
+      new Paragraph({
+        text: `학번: ${app.studentId}`,
+      }),
+      new Paragraph({
+        text: `전화번호: ${app.phone}`,
+      }),
+      new Paragraph({
+        text: `이메일: ${app.email}`,
+      }),
+      new Paragraph({
+        text: `답변`,
+        heading: HeadingLevel.HEADING_2,
+      }),
+      ...Answers.map((x) => app[x]).reduce((acc, cur, i) => {
+        if (questionList[i]) {
+          acc.push(
+            new Paragraph({
+              text: questionList[i],
+              heading: HeadingLevel.HEADING_3,
+            }),
+          );
+          acc.push(
+            new Paragraph({
+              text: cur,
+            }),
+          );
+        }
+        return acc;
+      }, [] as Paragraph[]),
+    ],
+  };
 }
 
 async function getQuestions(id: number) {
