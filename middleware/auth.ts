@@ -3,8 +3,14 @@ import { useAuthStore } from "~/store/auth";
 export let interval: NodeJS.Timer | null = null;
 
 export default defineNuxtRouteMiddleware(async () => {
-  await getAccessToken();
+  await run();
   // 40 minutes
   if (interval) clearInterval(interval);
-  interval = setInterval(getAccessToken, 40 * 60 * 1000);
+  interval = setInterval(run, 40 * 60 * 1000);
 });
+
+async function run() {
+  const authStore = useAuthStore();
+  const res = await getAccessToken();
+  authStore.setAccessToken(res.accessToken);
+}
