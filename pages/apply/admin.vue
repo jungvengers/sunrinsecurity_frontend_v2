@@ -123,6 +123,7 @@ const tableData = ref(
 watch(
   () => clubId.value,
   async (id) => {
+    tableData.value = [];
     questionList.value = await getQuestions(id);
     applyList.value = await getApplyOfClubList(id);
     tableData.value = applyList.value.map(
