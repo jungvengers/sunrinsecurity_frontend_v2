@@ -13,9 +13,35 @@
       ></Container.Table>
     </Container.Body>
     <Container.Footer>
-      <Container.Button title="돌아가기" @click="router.push(`/apply`)" />
-      <Container.Button title="내보내기(Excel)" @click="exportExcel()" />
-      <Container.Button title="내보내기(Word)" @click="exportDocx()" />
+      <Container.Column>
+        <Container.Row>
+          <Container.Button title="돌아가기" @click="router.push(`/apply`)" />
+          <Container.Button title="내보내기(Excel)" @click="exportExcel()" />
+          <Container.Button title="내보내기(Word)" @click="exportDocx()" />
+        </Container.Row>
+        <Container.Row v-if="admin.isAdmin">
+          <Container.Button
+            title="Layer7"
+            @click="router.push({ query: { club: 'layer7' } })"
+          />
+          <Container.Button
+            title="Teamlog"
+            @click="router.push({ query: { club: 'teamlog' } })"
+          />
+          <Container.Button
+            title="Emotion"
+            @click="router.push({ query: { club: 'emotion' } })"
+          />
+          <Container.Button
+            title="Nefus"
+            @click="router.push({ query: { club: 'nefus' } })"
+          />
+          <Container.Button
+            title="Unifox"
+            @click="router.push({ query: { club: 'unifox' } })"
+          />
+        </Container.Row>
+      </Container.Column>
     </Container.Footer>
   </Container.Wrapper>
   <Container.Modal v-if="detailModal && apply">
@@ -69,9 +95,12 @@ import {
   Paragraph,
 } from "docx";
 import { saveAs } from "file-saver";
+import { useAdminStore } from "~~/store/admin";
 
 const route = useRoute();
 const router = useRouter();
+
+const admin = useAdminStore();
 
 const tableData = ref<Array<Array<string>>>([]);
 const detailModal = ref<boolean>();
@@ -360,6 +389,17 @@ definePageMeta({
 .row:nth-child(2) {
   @include mobile {
     flex-direction: column;
+  }
+}
+
+.footer_panel {
+  .row {
+    justify-content: center;
+  }
+
+  .row:nth-child(2) {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
   }
 }
 </style>
