@@ -352,4 +352,14 @@ definePageMeta({
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.input_panel {
+  min-width: 0px;
+}
+
+.row:nth-child(2) {
+  @include mobile {
+    flex-direction: column;
+  }
+}
+</style>
