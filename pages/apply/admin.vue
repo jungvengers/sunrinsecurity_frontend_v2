@@ -102,7 +102,6 @@ const router = useRouter();
 
 const admin = useAdminStore();
 
-const tableData = ref<Array<Array<string>>>([]);
 const detailModal = ref<boolean>();
 
 const clubList = await getClubList();
@@ -113,16 +112,29 @@ const club = computed(() => {
     clubList[0]
   );
 });
-const clubId = club.value.id ?? 1;
+const clubId = computed(() => club.value.id ?? 1);
 
-const questionList = await getQuestions(clubId);
-const applyList = await getApplyOfClubList(clubId);
-tableData.value = applyList.map((x) => [x.name, x.studentId] as string[]);
+const questionList = ref(await getQuestions(clubId.value));
+const applyList = ref(await getApplyOfClubList(clubId.value));
+const tableData = ref(
+  applyList.value.map((x) => [x.name, x.studentId] as string[]),
+);
+
+watch(
+  () => route.query.club,
+  async () => {
+    questionList.value = await getQuestions(clubId.value);
+    applyList.value = await getApplyOfClubList(clubId.value);
+    tableData.value = applyList.value.map(
+      (x) => [x.name, x.studentId] as string[],
+    );
+  },
+);
 
 const apply = ref<Apply>();
 
 function detail(id: number) {
-  apply.value = applyList[id];
+  apply.value = applyList.value[id];
   console.log(apply.value);
   detailModal.value = true;
   // router.push({
@@ -254,14 +266,14 @@ const numbering: INumberingOptions = {
 function exportExcel() {
   const excel = xlsx.utils.book_new();
   const sheet = xlsx.utils.json_to_sheet(
-    applyList
+    applyList.value
       .map((x) => ({
         이름: x.name,
         학번: x.studentId,
         전화번호: x.phone,
         이메일: x.email,
         ...Answers.reduce((acc, cur, i) => {
-          if (questionList[i]) acc[questionList[i]] = x[cur];
+          if (questionList.value[i]) acc[questionList.value[i]] = x[cur];
           return acc;
         }, {} as Record<string, string>),
       }))
@@ -290,13 +302,13 @@ function exportDocx() {
             text: `동아리 명: ${club.value.name}`,
           }),
           new Paragraph({
-            text: `지원자 수: ${applyList.length}`,
+            text: `지원자 수: ${applyList.value.length}`,
           }),
           new Paragraph({
             text: `질문`,
             heading: HeadingLevel.HEADING_2,
           }),
-          ...questionList.map(
+          ...questionList.value.map(
             (x) =>
               new Paragraph({
                 text: x,
@@ -305,7 +317,7 @@ function exportDocx() {
           ),
         ],
       },
-      ...applyList.map(createSection),
+      ...applyList.value.map(createSection),
     ],
   });
   Packer.toBlob(doc).then((blob) => {
@@ -349,10 +361,10 @@ function createSection(app: Apply) {
         heading: HeadingLevel.HEADING_2,
       }),
       ...Answers.map((x) => app[x]).reduce((acc, cur, i) => {
-        if (questionList[i]) {
+        if (questionList.value[i]) {
           acc.push(
             new Paragraph({
-              text: questionList[i],
+              text: questionList.value[i],
               heading: HeadingLevel.HEADING_3,
             }),
           );
