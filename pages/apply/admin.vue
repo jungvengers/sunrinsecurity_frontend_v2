@@ -45,7 +45,7 @@
     </Container.Footer>
   </Container.Wrapper>
   <Container.Modal v-if="detailModal && apply">
-    <Container.Wrapper :style="{ width: '80vw' }">
+    <Container.Wrapper>
       <Container.Header title="지원서 상세" sub-title="지원서 상세 내용" />
       <Container.Body
         :style="{ 'flex-wrap': 'nowrap', 'overflow-y': 'scroll' }"
@@ -410,6 +410,20 @@ definePageMeta({
   .row:nth-child(2) {
     flex-wrap: wrap;
     justify-content: space-evenly;
+  }
+}
+
+.modal {
+  @include mobile {
+    padding: 0px;
+  }
+
+  .wrapper {
+    width: 80vw;
+    @include mobile {
+      width: 100%;
+      border-radius: 0px;
+    }
   }
 }
 </style>
