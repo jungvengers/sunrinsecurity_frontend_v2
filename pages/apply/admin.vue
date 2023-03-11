@@ -121,10 +121,10 @@ const tableData = ref(
 );
 
 watch(
-  () => route.query.club,
-  async () => {
-    questionList.value = await getQuestions(clubId.value);
-    applyList.value = await getApplyOfClubList(clubId.value);
+  () => clubId.value,
+  async (id) => {
+    questionList.value = await getQuestions(id);
+    applyList.value = await getApplyOfClubList(id);
     tableData.value = applyList.value.map(
       (x) => [x.name, x.studentId] as string[],
     );
@@ -135,7 +135,6 @@ const apply = ref<Apply>();
 
 function detail(id: number) {
   apply.value = applyList.value[id];
-  console.log(apply.value);
   detailModal.value = true;
   // router.push({
   //   query: { club: club.value.name },
@@ -266,18 +265,16 @@ const numbering: INumberingOptions = {
 function exportExcel() {
   const excel = xlsx.utils.book_new();
   const sheet = xlsx.utils.json_to_sheet(
-    applyList.value
-      .map((x) => ({
-        이름: x.name,
-        학번: x.studentId,
-        전화번호: x.phone,
-        이메일: x.email,
-        ...Answers.reduce((acc, cur, i) => {
-          if (questionList.value[i]) acc[questionList.value[i]] = x[cur];
-          return acc;
-        }, {} as Record<string, string>),
-      }))
-      .map((x) => (console.log(x), x)),
+    applyList.value.map((x) => ({
+      이름: x.name,
+      학번: x.studentId,
+      전화번호: x.phone,
+      이메일: x.email,
+      ...Answers.reduce((acc, cur, i) => {
+        if (questionList.value[i]) acc[questionList.value[i]] = x[cur];
+        return acc;
+      }, {} as Record<string, string>),
+    })),
   );
   xlsx.utils.book_append_sheet(excel, sheet, "지원자 목록");
   xlsx.writeFile(excel, `${club.value.name} 지원자 목록.xlsx`);
