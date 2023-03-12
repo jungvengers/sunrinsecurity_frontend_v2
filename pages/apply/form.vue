@@ -70,7 +70,7 @@
       </NuxtLink>
       <button v-if="route.query.edit" @click="_delete()">삭제</button>
       <button @click="submit()">
-        제출
+        저장
         <img src="@/assets/images/check.svg" />
       </button>
     </div>

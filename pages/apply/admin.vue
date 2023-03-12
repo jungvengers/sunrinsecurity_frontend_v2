@@ -58,7 +58,7 @@
           <Container.Input label="전화번호" :value="apply.phone" readonly />
           <Container.Input label="학교 이메일" :value="apply.email" readonly />
         </Container.Row>
-        <Container.TextArea
+        <Container.FormView
           v-for="(question, n) in questionList"
           :key="n"
           :label="question"
