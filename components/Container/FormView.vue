@@ -1,6 +1,9 @@
 <template>
   <div class="input_panel">
-    <p class="label">{{ props.label }}</p>
+    <div class="label_wrapper">
+      <p class="label">{{ props.label }}</p>
+      <p class="count">{{ props.value.length }}자 (공백포함)</p>
+    </div>
     <div class="input" type="text">{{ props.value }}</div>
   </div>
 </template>
@@ -39,12 +42,28 @@ const props = defineProps({
     font-size: 16px;
     background-color: #262626;
     color: #ffffff;
+    word-break: break-all;
     resize: vertical;
   }
 
-  .label {
-    color: #d9d9d9;
-    font-size: 16px;
+  .label_wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    p {
+      color: #d9d9d9;
+      font-size: 16px;
+
+      &:last-child {
+        font-size: 14px;
+      }
+    }
   }
 }
 </style>

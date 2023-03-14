@@ -132,6 +132,13 @@ watch(
   },
 );
 
+watch(
+  () => route.fullPath,
+  () => {
+    detailModal.value = false;
+  },
+);
+
 const apply = ref<Apply>();
 
 function detail(id: number) {
