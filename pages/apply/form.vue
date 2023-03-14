@@ -56,6 +56,7 @@
               v-model="answers[Answers[n]]"
               type="text"
               :placeholder="`답변을 입력하세요`"
+              :maxlength="getMaxLength(i)"
             />
           </div>
         </div>
@@ -179,6 +180,12 @@ async function getQuestions(id: number) {
     return Questions.map((x) => questions[x]).filter((x) => x);
   }
 }
+
+const getMaxLength = (i: string): number | undefined => {
+  const lastI = i.substring(i.indexOf("(") + 1, i.length);
+  if (lastI.includes("이내")) return parseInt(lastI);
+  else NaN;
+};
 
 definePageMeta({
   middleware: ["auth"],
