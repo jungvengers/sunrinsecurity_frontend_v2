@@ -56,7 +56,6 @@
               v-model="answers[Answers[n]]"
               type="text"
               :placeholder="`답변을 입력하세요`"
-              :maxlength="getMaxLength(i)"
             />
           </div>
         </div>
