@@ -184,6 +184,7 @@ async function getQuestions(id: number) {
 const getMaxLength = (i: string): number | undefined => {
   const lastI = i.substring(i.indexOf("(") + 1, i.length);
   if (lastI.includes("이내")) return parseInt(lastI);
+  else if (lastI.includes("내외")) return parseInt(lastI) + 50;
   else NaN;
 };
 
