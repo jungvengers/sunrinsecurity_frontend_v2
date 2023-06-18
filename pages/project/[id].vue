@@ -48,7 +48,7 @@
           </button>
         </NuxtLink>
       </div>
-      <div v-if="admin.isAdmin" class="admin">
+      <div v-if="admin.isClub" class="admin">
         <NuxtLink :to="{ query: { id }, path: `/notice/edit` }">
           <button class="btn">수정하기</button>
         </NuxtLink>

@@ -7,7 +7,7 @@
           정보보호과 학생들이 진행한 프로젝트를 확인할 수 있는 페이지입니다.
         </h2>
       </div>
-      <NuxtLink v-if="store.isAdmin" class="write_notice" :to="'/project/write'"
+      <NuxtLink v-if="store.isClub" class="write_notice" :to="'/project/write'"
         >글쓰기</NuxtLink
       >
     </div>
