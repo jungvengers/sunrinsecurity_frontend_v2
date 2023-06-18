@@ -10,6 +10,7 @@ import Row from "./Row.vue";
 import Table from "./Table.vue";
 import TextArea from "./TextArea.vue";
 import Wrapper from "./Wrapper.vue";
+import FormView from "./FormView.vue";
 
 export {
   Body,
@@ -24,6 +25,7 @@ export {
   Table,
   TextArea,
   Wrapper,
+  FormView,
 };
 
 export const Container = {
@@ -39,6 +41,7 @@ export const Container = {
   Table,
   TextArea,
   Wrapper,
+  FormView,
 };
 
 export default {
@@ -54,4 +57,5 @@ export default {
   Table,
   TextArea,
   Wrapper,
+  FormView,
 };

@@ -41,7 +41,7 @@ const props = defineProps({
 });
 
 function onClick(idx: number) {
-  console.log("clicked", idx);
+  // console.log("clicked", idx);
   emit("click-item", idx);
 }
 </script>

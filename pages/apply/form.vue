@@ -70,7 +70,7 @@
       </NuxtLink>
       <button v-if="route.query.edit" @click="_delete()">삭제</button>
       <button @click="submit()">
-        제출
+        저장
         <img src="@/assets/images/check.svg" />
       </button>
     </div>
@@ -179,6 +179,13 @@ async function getQuestions(id: number) {
     return Questions.map((x) => questions[x]).filter((x) => x);
   }
 }
+
+const getMaxLength = (i: string): number | undefined => {
+  const lastI = i.substring(i.indexOf("(") + 1, i.length);
+  if (lastI.includes("이내")) return parseInt(lastI);
+  else if (lastI.includes("내외")) return parseInt(lastI) + 50;
+  else NaN;
+};
 
 definePageMeta({
   middleware: ["auth"],
