@@ -159,6 +159,7 @@ const submit = async () => {
     ? await editAnswer(clubId.value, form)
     : await createAnswer(form);
   if (res.statusCode === 400) alert(res.message);
+  if (res.statusCode === 403) alert("동아리 지원 기간이 아닙니다.");
   router.push("/apply");
 };
 
