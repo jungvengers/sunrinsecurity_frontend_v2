@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     },
     build: {
       rollupOptions: {
-        external: ["vue", "vue-router"],
+        external: ["vue", "vue-router", "unctx"],
       }
     }
   },
