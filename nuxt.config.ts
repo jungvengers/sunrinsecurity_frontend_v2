@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   ssr: false,
   modules: ["@pinia/nuxt"],
   css: ["~/assets/styles/global.scss"],
+
   app: {
     head: {
       title: "정보보호과",
@@ -14,6 +15,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
     },
   },
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -23,12 +25,8 @@ export default defineNuxtConfig({
         },
       },
     },
-    build: {
-      rollupOptions: {
-        external: ["vue", "vue-router", "unctx"],
-      }
-    }
   },
+
   runtimeConfig: {
     public: {
       BaseUrl: process.env.BASE_URL ?? "http://localhost:3000",
@@ -37,4 +35,6 @@ export default defineNuxtConfig({
       googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID ?? "G-XXXXXXXXXX",
     },
   },
+
+  compatibilityDate: "2025-02-25",
 });
