@@ -34,6 +34,7 @@
     "file-saver": "^2.0.5",
     "source-map-support": "^0.5.21",
     "unenv": "^1.10.0",
+    "unstorage": "^1.15.0",
     "xlsx": "^0.18.5"
   }
 }
