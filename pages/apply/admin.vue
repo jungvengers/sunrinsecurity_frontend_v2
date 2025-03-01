@@ -29,7 +29,7 @@
             @click="router.push({ query: { club: 'teamlog' } })"
           />
           <Container.Button
-            title=""IRIS"
+            title="IRIS"
             @click="router.push({ query: { club: 'iris' } })"
           />
           <Container.Button
