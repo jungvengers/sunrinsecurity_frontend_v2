@@ -29,12 +29,8 @@
             @click="router.push({ query: { club: 'teamlog' } })"
           />
           <Container.Button
-            title="Emotion"
-            @click="router.push({ query: { club: 'emotion' } })"
-          />
-          <Container.Button
-            title="Nefus"
-            @click="router.push({ query: { club: 'nefus' } })"
+            title=""IRIS"
+            @click="router.push({ query: { club: 'iris' } })"
           />
           <Container.Button
             title="Unifox"
