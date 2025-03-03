@@ -1,8 +1,8 @@
 export default [
-  {
-    name: "학과소식",
-    path: "/notice",
-  },
+  // {
+  //   name: "학과소식",
+  //   path: "/notice",
+  // },
   {
     name: "프로젝트 전시장",
     path: "/project",
