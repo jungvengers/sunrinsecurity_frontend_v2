@@ -1,0 +1,111 @@
+@import "_variables.scss";
+
+.department {
+  .department_panel {
+    display: flex;
+    padding: 44px;
+    gap: 44px;
+
+    @include tablet {
+      flex-direction: column;
+    }
+
+    .department_title_wrapper {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+
+      img {
+        @include tablet {
+          width: 100px;
+          height: 100px;
+        }
+      }
+      
+      .name_mobile {
+        display: none;
+      
+        @include tablet {
+          display: block;
+          font-size: 28px;
+          font-weight: $font_semi_bold;
+          color: $grayscale_70;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    .department_image {
+      width: 220px;
+      height: 220px;
+    }
+
+    .department_description {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+
+      .name {
+        font-size: 28px;
+        font-weight: $font_semi_bold;
+        color: $grayscale_70;
+
+        @include tablet {
+          display: none;
+          align-items: center;
+        }
+      }
+
+      div {
+        p:first-child {
+          margin-bottom: 4px;
+          color: $grayscale_50;
+          font-size: 16px;
+          font-weight: $font_medium;
+        }
+
+        p:last-child {
+          color: $grayscale_60;
+          font-size: 16px;
+          font-weight: $font_medium;
+          line-height: 150%;
+        }
+      }
+
+      .contact {
+        display: flex;
+        gap: 16px;
+      }
+    }
+  }
+
+  .department_list {
+    border-top: 1px solid $grayscale_40;
+
+    .department_list_panel {
+      padding: 24px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: $grayscale_50;
+      font-size: 16px;
+      font-weight: $font_medium;
+
+      @include tablet {
+        padding: 20px 10px;
+      }
+      
+      .department_list_item {
+        padding: 8px 16px;
+        border-radius: 8px;
+      }
+
+      .active {
+        color: $grayscale_70;
+        background-color: $grayscale_40;
+      }
+    }
+  }
+}
