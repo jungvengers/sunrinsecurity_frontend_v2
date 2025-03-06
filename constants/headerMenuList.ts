@@ -4,6 +4,10 @@ export default [
   //   path: "/notice",
   // },
   {
+    name: "학과 소개",
+    path: "/department",
+  },
+  {
     name: "프로젝트 전시장",
     path: "/project",
   },
