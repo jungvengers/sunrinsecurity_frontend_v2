@@ -3,8 +3,7 @@
     <div class="title_panel">
       <div>
         <h1 class="title">{{ club.name }} 지원</h1>
-        <h2 class="sub_title">동아리에 지원할 수 있습니다.</h2><br>
-        <h2 class="sub_title">모든 질문은 띄어쓰기를 포함한 기준입니다.</h2>
+        <h2 class="sub_title">동아리에 지원할 수 있습니다. 모든 동아리 질문은 띄어쓰기 포함입니다.</h2>
       </div>
     </div>
     <div class="form_panel">
